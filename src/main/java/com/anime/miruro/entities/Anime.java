@@ -1,5 +1,6 @@
 package com.anime.miruro.entities;
 
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +13,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,17 +31,26 @@ public class Anime {
 
     private String name;
 
+    private String description;
+
+    private int episodes;
+
+    private Date rilascio;
     
     public Anime() {}
 
-    public Anime(String image, String name) {
+    
+    
+    public Anime(String image, String name, String description, int episodes, Date rilascio) {
         this.image = image;
         this.name = name;
+        this.description = description;
+        this.episodes = episodes;
+        this.rilascio = rilascio;
     }
-    
-    @OneToOne(mappedBy = "anime", cascade = {CascadeType.ALL})
-    private AnimeDetail animeDetail;
-    
+
+
+
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
         name = "anime_genre",
@@ -90,11 +99,13 @@ public class Anime {
 
         this.characters.add(character);
     }
-
     @Override
     public String toString() {
-        return "Anime [id=" + id + ", image=" + image + ", name=" + name + "]";
+        return "Anime [id=" + id + ", image=" + image + ", name=" + name + ", description=" + description
+                + ", episodes=" + episodes + ", rilascio=" + rilascio + "]";
     }
+
+    
     
     
 }
