@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,9 +24,16 @@ public class Genre {
     @Column(name = "genre_name")
     private String genreName;
 
+    @ManyToMany(mappedBy = "genres")
+    private Anime anime;
+
     public Genre(String genreName) {
         this.genreName = genreName;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Genre [id=" + id + ", genreName=" + genreName + "]";
+    }
+
 }
