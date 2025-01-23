@@ -1,5 +1,8 @@
 package com.anime.miruro.entities;
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,8 +26,12 @@ public class Studio {
 
     private int dob;
 
-    @ManyToMany(mappedBy = "studios")
-    private Anime anime;
+    @ManyToMany(mappedBy = "studios", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Anime> anime;
+
+    
+    public Studio() {
+    }
 
     public Studio(String name, int dob) {
         this.name = name;

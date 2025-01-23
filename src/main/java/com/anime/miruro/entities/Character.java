@@ -1,5 +1,6 @@
 package com.anime.miruro.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,9 +25,13 @@ public class Character {
 
     private String role;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "anime_id")
     private Anime anime;
+
+    
+    public Character() {
+    }
 
     public Character(String name, String role) {
         this.name = name;

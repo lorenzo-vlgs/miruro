@@ -2,6 +2,7 @@ package com.anime.miruro.entities;
 
 import java.sql.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,9 +29,13 @@ public class AnimeDetail {
 
     private Date rilascio;
 
-    @OneToOne
-    @JoinColumn(name = "anime_id", nullable = false)
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "anime_id")
     private Anime anime;
+
+    
+    public AnimeDetail() {
+    }
 
     public AnimeDetail(String description, int episodes, Date rilascio) {
         this.description = description;

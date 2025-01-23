@@ -31,15 +31,18 @@ public class Anime {
 
     private String name;
 
+    
+    public Anime() {}
+
     public Anime(String image, String name) {
         this.image = image;
         this.name = name;
     }
     
-    @OneToOne(mappedBy = "anime")
+    @OneToOne(mappedBy = "anime", cascade = {CascadeType.ALL})
     private AnimeDetail animeDetail;
     
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
         name = "anime_genre",
         joinColumns = @JoinColumn(name = "anime_id"),
@@ -47,7 +50,7 @@ public class Anime {
     )
     private Set<Genre> genres;
         
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
         name = "anime_studio",
         joinColumns = @JoinColumn(name = "anime_id"),
@@ -55,7 +58,7 @@ public class Anime {
     )
     private Set<Studio> studios;
     
-    @OneToMany(mappedBy = "anime", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "anime", cascade = {CascadeType.ALL})
     private Set<Character> characters;
 
     // Aggiungi un genere nella lista

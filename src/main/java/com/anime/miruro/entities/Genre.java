@@ -1,5 +1,8 @@
 package com.anime.miruro.entities;
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,8 +27,12 @@ public class Genre {
     @Column(name = "genre_name")
     private String genreName;
 
-    @ManyToMany(mappedBy = "genres")
-    private Anime anime;
+    @ManyToMany(mappedBy = "genres", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Anime> anime;
+
+    
+    public Genre() {
+    }
 
     public Genre(String genreName) {
         this.genreName = genreName;
