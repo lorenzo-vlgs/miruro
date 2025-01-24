@@ -13,25 +13,25 @@ public abstract class GenericService<I, E, D extends JpaRepository<E,I>> {
     private D repository;
 
     @Transactional
-    void save(E e) {
+    public void save(E e) {
         repository.save(e);
     }
 
-    List<E> findAll(){
+    public List<E> findAll(){
         return repository.findAll();    
     }
 
-    E findById(I id){
+    public E findById(I id){
         return repository.findById(id).get();
     }
 
     @Transactional
-    void update(E e){
+    public void update(E e){
         repository.save(e);
     }
 
     @Transactional
-    void delete(I id){
+    public void delete(I id){
         repository.deleteById(id);
     }
 }

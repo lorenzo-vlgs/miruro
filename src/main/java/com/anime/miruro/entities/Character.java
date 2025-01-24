@@ -1,5 +1,7 @@
 package com.anime.miruro.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ public class Character {
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "anime_id")
+    @JsonBackReference
     private Anime anime;
 
     

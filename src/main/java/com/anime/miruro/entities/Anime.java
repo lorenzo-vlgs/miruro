@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -57,6 +59,7 @@ public class Anime {
         joinColumns = @JoinColumn(name = "anime_id"),
         inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
+    @JsonManagedReference
     private Set<Genre> genres;
         
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -65,9 +68,11 @@ public class Anime {
         joinColumns = @JoinColumn(name = "anime_id"),
         inverseJoinColumns = @JoinColumn(name = "studio_id")
     )
+    @JsonManagedReference
     private Set<Studio> studios;
     
     @OneToMany(mappedBy = "anime", cascade = {CascadeType.ALL})
+    @JsonManagedReference
     private Set<Character> characters;
 
     // Aggiungi un genere nella lista

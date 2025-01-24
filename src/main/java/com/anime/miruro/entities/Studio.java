@@ -2,6 +2,8 @@ package com.anime.miruro.entities;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ public class Studio {
     private int dob;
 
     @ManyToMany(mappedBy = "studios", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonBackReference
     private Set<Anime> anime;
 
     
