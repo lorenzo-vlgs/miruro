@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,9 +27,37 @@ public class StudioController {
         this.studioService = studioService;
     }
 
+    // CREATE
+    //
+    @PostMapping("/save")
+    public void save(@RequestBody Studio studio){
+        studioService.save(studio);
+    }
+
+    // READ 
+    //
     @GetMapping("/all")
-    public List<Studio> findAll(){
-        return studioService.findAll();
+    public List<Studio> getAll(){
+        return studioService.findAll();    
+    }
+
+    @GetMapping("/{id}")
+    public Studio getById(@PathVariable int id){
+        return studioService.findById(id);
+    }
+
+    // UPDATE
+    //
+    @PostMapping("/update")
+    public void update(@RequestBody Studio studio) {
+        studioService.update(studio);
+    }
+    
+    // DELETE
+    //
+    @PostMapping("/delete")
+    public void delete(@RequestBody int id){
+        studioService.delete(id);
     }
     
 }
