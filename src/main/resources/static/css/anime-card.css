@@ -1,0 +1,58 @@
+/* Anime card style */
+/* Container for anime cards */
+.anime-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 16px;
+    padding: 16px;
+    transition: transform 0.3s ease;
+}
+
+.anime-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Image styling */
+.anime-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Details container */
+.anime-details {
+    text-align: center;
+    margin-top: 12px;
+}
+
+/* Title styling */
+.anime-title {
+    font-size: 1.5rem;
+    color: #f0f0f0;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    max-width: 150px;
+}
+
+/* Categories container */
+.anime-categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Category badge styling */
+.category {
+    background-color: #33333317;
+    color: #f0f0f0;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.605rem;
+}

@@ -1,3 +1,7 @@
 .navbar-outline {
     border-bottom: 0.2px solid #ffffff33; /* Adjust the color and width as needed */
 }
+
+.bottom-outline {
+    border-bottom: 0.2px solid #ffffff33;
+}
