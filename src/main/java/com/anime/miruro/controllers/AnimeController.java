@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.anime.miruro.entities.Anime;
 import com.anime.miruro.services.AnimeService;
 
+
 @RestController
 @RequestMapping("api/animes")
 public class AnimeController {
@@ -60,5 +61,12 @@ public class AnimeController {
         animeService.delete(id);
     }
 
+    
+    // COUNT HOW MANY ANIMES THERE ARE IN THE DB
+    //
+    @GetMapping("/count")
+    public Long getCount() {
+        return animeService.getCount();
+    }
     
 }

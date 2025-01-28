@@ -5,3 +5,7 @@
 .bottom-outline {
     border-bottom: 0.2px solid #ffffff33;
 }
+
+.half {
+    width: 50%;
+}

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.anime.miruro.entities.Genre;
 import com.anime.miruro.services.GenreService;
 
+
 @RestController
 @RequestMapping("api/genres")
 public class GenreController {
@@ -59,4 +60,12 @@ public class GenreController {
     public void delete(@RequestBody int id){
         genreService.delete(id);
     }
+
+    // GET GENRE COUNT
+    //
+    @GetMapping("/count")
+    public Long getGenreCount() {
+        return genreService.getCount();
+    }
+    
 }

@@ -60,5 +60,9 @@ public class CharacterController {
         characterService.delete(id);
     }
     
+    @GetMapping("/count")
+    public Long getCharactersCount(){
+        return characterService.getCount();
+    }
     
 }

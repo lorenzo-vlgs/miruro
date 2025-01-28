@@ -59,5 +59,12 @@ public class StudioController {
     public void delete(@RequestBody int id){
         studioService.delete(id);
     }
+
+    // GET GENRE COUNT
+    //
+    @GetMapping("/count")
+    public Long getGenreCount() {
+        return studioService.getCount();
+    }
     
 }

@@ -8,5 +8,4 @@ import com.anime.miruro.repositories.AnimeRepository;
 @Service
 public class AnimeService extends GenericService<Integer, Anime, AnimeRepository>{
     
-    
 }

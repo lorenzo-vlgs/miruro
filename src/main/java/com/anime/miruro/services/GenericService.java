@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import jakarta.transaction.Transactional;
+import lombok.Getter;
 
+@Getter
 public abstract class GenericService<I, E, D extends JpaRepository<E,I>> {
     
     @Autowired
@@ -33,5 +35,9 @@ public abstract class GenericService<I, E, D extends JpaRepository<E,I>> {
     @Transactional
     public void delete(I id){
         repository.deleteById(id);
+    }
+
+    public Long getCount(){
+        return repository.count();
     }
 }

@@ -7,5 +7,5 @@ import com.anime.miruro.repositories.CharacterRepository;
 
 @Service
 public class CharacterService extends GenericService<Integer, Character, CharacterRepository>{
-    
+
 }

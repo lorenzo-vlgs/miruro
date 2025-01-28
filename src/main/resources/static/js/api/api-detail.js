@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Use the 'id' variable to fetch and display anime details
     if (id) {
-        getAllAnime(id);
+        getAnime(id);
     } else {
         console.error('Anime ID not found in the URL');
     }
 
-    async function getAllAnime() {
+    async function getAnime() {
         try {
             const response = await fetch(
                 `api/animes/${id}`,
