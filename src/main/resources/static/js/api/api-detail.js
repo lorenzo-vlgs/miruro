@@ -52,6 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 bodyHtml += `<div class="col-7"><br><br><div class="bottom-outline fs-4 fw-semibold">Characters</div><br>`;
 
+                bodyHtml += `<div class="row">`;    
+                for (let i = 0; i < anime.characters.length; i++) {
+                    if (i % 3 === 0 && i !== 0) {
+                        bodyHtml += `</div><div class="row">`;
+                    }
+                    bodyHtml += `<div class="col-md-4">`;
+                    bodyHtml += `<div class="character"><img src="${anime.characters[i].image}" alt="${anime.characters[i].name}"><span class="fw-semibold"> ${anime.characters[i].name}</span><span class="fs-6">  ${anime.characters[i].role}</span></div>`;
+                    bodyHtml += `</div>`;
+                }
+                bodyHtml += `</div>`;
+
+
                 bodyHtml += `</div>`; //Closing row div
 
                 animeList.innerHTML = bodyHtml;

@@ -1,0 +1,45 @@
+<!-- Main navbar for seaching animes -->
+<nav class="navbar navbar-expand-lg navbar-outline">
+    <div class="container-fluid">
+        <!-- Navbar image -->
+      <a class="navbar-brand" href="/home">MIRUROtv</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Navbar content -->
+      <div class="collapse navbar-collapse">
+        <form class="d-flex mx-auto w-50" role="search" style="max-width: 600px;">
+            <input class="form-control me-2" type="search" placeholder="Search Anime" aria-label="Search">
+            <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+        </form>
+      </div>
+      <div class="btn-group">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+          <i class="bi bi-person-circle" style="font-size: 1.5rem; color: #fff;"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-lg-end">
+          <li><a class="dropdown-item" href="/admin">Admin</a></li>
+          <li><a class="dropdown-item" href="#">Log out</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Smaller navbar for the options -->
+  <ul class="nav justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link text-dark-emphasis" aria-current="page" href="/trending">Trending</a>
+    </li>
+    <li class="nav-item dropdown ">
+        <a class="nav-link dropdown-toggle text-dark-emphasis" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Genres
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Fantasy</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">All genres</a></li>
+        </ul>
+      </li>
+  </ul>
+
+  <br><br>

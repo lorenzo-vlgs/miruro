@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="/css/anime-detail.css">
 
     <!-- JS -->
-    <script src="/js/api-detail.js" defer></script>
-
+    <script src="/js/api/api-detail.js" defer></script>
+    
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Bootstrap CSS -->
@@ -22,53 +22,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
 </head>
 <body>
-    <!-- Main navbar for seaching animes -->
-    <nav class="navbar navbar-expand-lg navbar-outline">
-        <div class="container-fluid">
-            <!-- Navbar image -->
-          <a class="navbar-brand" href="/homepage">MIRUROtv</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <!-- Navbar content -->
-          <div class="collapse navbar-collapse">
-            <form class="d-flex mx-auto w-50" role="search" style="max-width: 600px;">
-                <input class="form-control me-2" type="search" placeholder="Search Anime" aria-label="Search">
-                <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
-            </form>
-          </div>
-          <a href="#" class="ms-auto">
-            <i class="bi bi-person-circle" style="font-size: 1.5rem; color: #fff;"></i>
-        </a>
-        </div>
-      </nav>
-      <!-- Smaller navbar for the options -->
-      <ul class="nav justify-content-center">
-        <li class="nav-item">
-          <a class="nav-link text-dark-emphasis" aria-current="page" href="#">Trending</a>
-        </li>
-        <li class="nav-item">   
-          <a class="nav-link text-dark-emphasis" href="#">Seasonal</a>
-        </li>
-        <li class="nav-item dropdown ">
-            <a class="nav-link dropdown-toggle text-dark-emphasis" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Genres
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Fantasy</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">All genres</a></li>
-            </ul>
-          </li>
-      </ul>
+    <!-- Navbar -->
+    <script id="replace_with_navbar" src="/js/navbar/nav.js"></script>
 
-      <br><br>
-      <!-- Main content -->
-      <div class="container" id="anime-card">
-        
-          
-        
-      </div>
+    <!-- Main content -->
+    <div class="container" id="anime-card">  
+      <!-- Animes will be placed here dynamically -->
+    </div>
+
 </body>
 </html>

@@ -15,3 +15,7 @@
     margin: 4px; /* Add some margin for spacing */
     display: inline-block; /* Ensure they are inline elements */
 }
+
+.character {
+    margin-bottom: 30px;
+}
