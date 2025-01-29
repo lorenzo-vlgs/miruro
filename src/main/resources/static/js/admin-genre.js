@@ -1,10 +1,4 @@
 document.getElementById('genre-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting the traditional way
-    
-
-});
-
-document.getElementById('genre-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
     var modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));

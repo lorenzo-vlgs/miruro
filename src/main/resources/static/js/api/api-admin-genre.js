@@ -19,13 +19,24 @@ async function getAllGenres(url, tagId) {
                 bodyHtml += `<div>`;
                 bodyHtml += `<p class='fw-semibold fs-3' style='margin-top: 30px'>${genre.genreName}</p>`;
                 bodyHtml += `<br>`;
-                bodyHtml += `<button class="btn btn-secondary me-2">Edit</button>`;
+                bodyHtml += `<button class="btn btn-secondary me-2 edit-button" data-name="${genre.genreName}" data-id="${genre.id}" data-bs-toggle="modal" data-bs-target="#editGenre">Edit</button>`;
                 bodyHtml += `<button class="btn btn-danger">Delete</button>`;
                 bodyHtml += `</div>`;
             }
 
             element.innerHTML = bodyHtml;
 
+            // Add event listeners to the edit buttons
+            const editButtons = document.querySelectorAll('.edit-button');
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const genreId = this.getAttribute('data-id');
+                    const genreName = this.getAttribute('data-name');
+                    document.getElementById('genreId').value = genreId;
+                    document.getElementById('genre-name').innerHTML = genreName;
+                });
+            });
+            
         } else {
             const errorText = await response.text();
             console.error(`Failed to fetch data from ${url}: `, errorText)
