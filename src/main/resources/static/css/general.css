@@ -9,3 +9,17 @@
 .half {
     width: 50%;
 }
+
+.half-75 {
+    width: 75%;
+}
+
+#success-alert {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050; /* Ensure it appears above other elements */
+    margin-top: 100px;
+}

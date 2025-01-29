@@ -1,6 +1,7 @@
 package com.anime.miruro.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,8 @@ public class GenreController {
     // CREATE
     //
     @PostMapping("/save")
-    public void save(@RequestBody Genre genre){
+    public void save(@RequestBody Map<String,String> genreData){
+        Genre genre = new Genre(genreData.get("genreName"));
         genreService.save(genre);
     }
 
