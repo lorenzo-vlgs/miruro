@@ -17,7 +17,7 @@ public class AppController {
 
     @GetMapping("/home")
     public String getHomepage(){
-        return "html/homepage.html";
+        return "html/user/homepage.html";
     }
 
     //
@@ -25,7 +25,7 @@ public class AppController {
     //
     @GetMapping("/anime")
     public String getAnimeDetail() {
-        return "html/anime-detail.html";
+        return "html/user/anime-detail.html";
     }
 
     @GetMapping("/trending")
@@ -33,7 +33,6 @@ public class AppController {
         return "/html/trending.html";
     }
     
-
     //
     // ADMIN RELATED ENDPOINTS
     //
@@ -52,5 +51,9 @@ public class AppController {
         return "/html/admin/admin-studio.html";
     }
     
+    @GetMapping("/admin/studios/form")
+    public String getStudiosForm(){
+        return "/html/admin/admin-studio-form.html";
+    }
 
 }
