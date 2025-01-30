@@ -52,14 +52,20 @@ public class GenreController {
     // UPDATE
     //
     @PostMapping("/update")
-    public void update(@RequestBody Genre genre) {
+    public void update(@RequestBody Map<String,String> genreData) {
+        Genre genre = new Genre();
+
+        genre.setGenreName(genreData.get("genreName"));
+        genre.setId(Integer.parseInt(genreData.get("id")));
+
         genreService.update(genre);
     }
     
     // DELETE
     //
     @PostMapping("/delete")
-    public void delete(@RequestBody int id){
+    public void delete(@RequestBody Map<String,String> genreData){
+        int id = Integer.parseInt(genreData.get("id"));
         genreService.delete(id);
     }
 

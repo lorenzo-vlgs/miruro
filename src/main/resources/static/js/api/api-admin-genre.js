@@ -20,13 +20,14 @@ async function getAllGenres(url, tagId) {
                 bodyHtml += `<p class='fw-semibold fs-3' style='margin-top: 30px'>${genre.genreName}</p>`;
                 bodyHtml += `<br>`;
                 bodyHtml += `<button class="btn btn-secondary me-2 edit-button" data-name="${genre.genreName}" data-id="${genre.id}" data-bs-toggle="modal" data-bs-target="#editGenre">Edit</button>`;
-                bodyHtml += `<button class="btn btn-danger">Delete</button>`;
+                bodyHtml += `<button class="btn btn-danger delete-button" data-name="${genre.genreName}" data-id="${genre.id}" data-bs-toggle="modal" data-bs-target="#deleteGenre">Delete</button>`;
                 bodyHtml += `</div>`;
             }
 
             element.innerHTML = bodyHtml;
 
             // Add event listeners to the edit buttons
+            // For each genre this dynamically give the id and name to the modal
             const editButtons = document.querySelectorAll('.edit-button');
             editButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -34,6 +35,16 @@ async function getAllGenres(url, tagId) {
                     const genreName = this.getAttribute('data-name');
                     document.getElementById('genreId').value = genreId;
                     document.getElementById('genre-name').innerHTML = genreName;
+                });
+            });
+
+            const deleteButtons = document.querySelectorAll('.delete-button');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const genreId = this.getAttribute('data-id');
+                    const genreName = this.getAttribute('data-name');
+                    document.getElementById('genreIdDelete').value = genreId;
+                    document.getElementById('genre-name-delete').innerHTML = genreName;
                 });
             });
             
@@ -53,12 +64,12 @@ getAllGenres('/api/genres/all', 'genres-list');
 
 
 //
-// USED TO SAVE NEW GENRES
+// USED TO SAVE NEW GENRES AND EDIT EXISTING ONES
 //
-async function saveGenre(genreData) {
+async function postGenre(url,genreData) {
 
     try {
-        const response = await fetch('/api/genres/save', {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(genreData)

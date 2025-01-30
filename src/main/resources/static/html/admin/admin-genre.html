@@ -87,11 +87,32 @@
                     <form method="post" id="edit-genre-form">
                         <div class="mb-3">
                             <input type="number" name="genreId" id="genreId" hidden>
-                            <label for="edit-genre" class="form-label">Genre</label>
-                            <input type="text" class="form-control" id="edit-genre" aria-describedby="genreHelp">
+                            <label for="genreName" class="form-label">Genre</label>
+                            <input type="text" class="form-control" id="genreName" aria-describedby="genreHelp">
                             <div id="genreHelp" class="form-text">Duplicated genres might cause problems</div>
                         </div>
                         <button type="submit" class="btn btn-success">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete confirmation modal -->
+    <div class="modal fade" id="deleteGenre" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Genre - <span id="genre-name-delete"></span></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="delete-genre-form">
+                        <div class="mb-3">
+                            <input type="number" name="genreId" id="genreIdDelete" hidden>
+                            <p>Are you sure you want to delete this genre?</p>
+                        </div>
+                        <button type="submit" class="btn btn-success">Confirm</button>
                     </form>
                 </div>
             </div>

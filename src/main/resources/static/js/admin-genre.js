@@ -1,7 +1,7 @@
 document.getElementById('genre-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    var modal = bootstrap.Modal.getInstance(document.getElementById('exampleModal'));
+    var modal = bootstrap.Modal.getInstance(document.getElementById('saveGenre'));
     modal.hide();
 
     var alert = document.getElementById('success-alert');
@@ -17,9 +17,50 @@ document.getElementById('genre-form').addEventListener('submit', function(event)
     const genre = document.getElementById('genre').value;
     const genreData = { "genreName": genre}
 
-    saveGenre(genreData);
+    postGenre('/api/genres/save',genreData);
 });
 
+document.getElementById('edit-genre-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var modal = bootstrap.Modal.getInstance(document.getElementById('editGenre'));
+    modal.hide();
+
+    var alert = document.getElementById('success-alert');
+    alert.style.display = 'block';
+    console.log('Alert displayed'); // Debugging line
+
+    setTimeout(function() {
+        alert.style.display = 'none';
+        console.log('Alert hidden'); // Debugging line
+        location.reload(); // Reload the page
+    }, 3000);
+
+    let id = document.getElementById('genreId').value;
+    let genreName = document.getElementById('genreName').value;
+
+    let genreData = {
+        "id": id,
+        "genreName": genreName
+    };
+
+    postGenre('/api/genres/update',genreData);
+    
+});
+
+document.getElementById('delete-genre-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var modal = bootstrap.Modal.getInstance(document.getElementById('deleteGenre'));
+    modal.hide();
+    
+    let id = document.getElementById('genreIdDelete').value;
+
+    let genreData = { "id": id};
+
+    postGenre('/api/genres/delete',genreData);
+    location.reload(); // Reload the page
+});
 
 function createFAQ(question, answer) {
     const faqContainer = document.createElement('div');
