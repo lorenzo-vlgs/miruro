@@ -1,6 +1,7 @@
 package com.anime.miruro.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,14 @@ public class StudioController {
     // CREATE
     //
     @PostMapping("/save")
-    public void save(@RequestBody Studio studio){
+    public void save(@RequestBody Map<String,String> studioData){
+        Studio studio = new Studio();
+
+        studio.setName(studioData.get("name"));
+        studio.setImage(studioData.get("image"));
+        studio.setDescription(studioData.get("description"));
+        studio.setDob(Integer.parseInt(studioData.get("dob")));
+        
         studioService.save(studio);
     }
 

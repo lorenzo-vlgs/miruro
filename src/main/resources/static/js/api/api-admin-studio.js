@@ -1,6 +1,10 @@
 //
 // OTTENGO TUTTI I GENERI DAL DB
 //
+document.addEventListener('DOMContentLoaded', () => {
+    getAllStudios('/api/studios/all', 'studios-list');
+})
+
 async function getAllStudios(url,tagId) {
     
     try {
@@ -17,13 +21,16 @@ async function getAllStudios(url,tagId) {
             let bodyHtml = '';
 
             for (let studio of data) {
-                bodyHtml += `<div>`;
-                bodyHtml += `<img src="${studio.image}" alt="${studio.name}" style="width: 200px; height: auto; margin-top: 40px;">`
-                bodyHtml += `<p class='fw-semibold fs-3' style='margin-top: 30px'>${studio.name}</p>`;
+                bodyHtml += `<div class="d-flex flex-column align-items-center">`;
+                bodyHtml += `<img src="${studio.image}" alt="${studio.name}" class="img-fluid" style="width: 200px; height: auto; margin-top: 40px;">`;
+                bodyHtml += `<p class='fw-semibold fs-3 studio-title text-center'>${studio.name}</p>`;
                 bodyHtml += `<br>`;
+                bodyHtml += `<div class="d-flex">`;
                 bodyHtml += `<button class="btn btn-secondary me-2 edit-button">Edit</button>`;
                 bodyHtml += `<button class="btn btn-danger delete-button">Delete</button>`;
                 bodyHtml += `</div>`;
+                bodyHtml += `</div>`;
+
             }
 
             element.innerHTML = bodyHtml;
@@ -40,4 +47,3 @@ async function getAllStudios(url,tagId) {
 
 // CHIAMA LA FUNZIONE
 //
-getAllStudios('/api/studios/all', 'studios-list');

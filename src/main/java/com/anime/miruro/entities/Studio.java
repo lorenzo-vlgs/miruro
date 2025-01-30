@@ -28,6 +28,8 @@ public class Studio {
 
     private String name;
 
+    private String description;
+    
     private int dob;
 
     @ManyToMany(mappedBy = "studios", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
