@@ -24,6 +24,8 @@ public class Studio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String image;
+
     private String name;
 
     private int dob;
@@ -36,7 +38,8 @@ public class Studio {
     public Studio() {
     }
 
-    public Studio(String name, int dob) {
+    public Studio(String image, String name, int dob) {
+        this.image = image;
         this.name = name;
         this.dob = dob;
     }

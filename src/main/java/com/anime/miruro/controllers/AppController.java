@@ -46,6 +46,11 @@ public class AppController {
     public String getGenresAdmin() {
         return "/html/admin/admin-genre.html";
     }
+
+    @GetMapping("/admin/studios")
+    public String getStudiosAdmin(){
+        return "/html/admin/admin-studio.html";
+    }
     
 
 }
