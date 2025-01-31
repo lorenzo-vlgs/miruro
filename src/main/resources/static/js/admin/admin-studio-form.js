@@ -1,4 +1,19 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Ricava dall'url l'id dello studio
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+
+    if (id > 0) {
+        getStudio(`/api/studios/${id}`);
+
+    }
+    
+});
+
 document.getElementById('studioImage').addEventListener('input', function() {
+
+    // Serve a mostrare l'immagine dopo aver inserito l'url nell'input
     const url = this.value;
     document.getElementById('imageDisplay').src = url;
 });

@@ -26,7 +26,7 @@ async function getAllStudios(url,tagId) {
                 bodyHtml += `<p class='fw-semibold fs-3 studio-title text-center'>${studio.name}</p>`;
                 bodyHtml += `<br>`;
                 bodyHtml += `<div class="d-flex">`;
-                bodyHtml += `<button class="btn btn-secondary me-2 edit-button">Edit</button>`;
+                bodyHtml += `<button class="btn btn-secondary me-2 edit-button ">Edit</button>`;
                 bodyHtml += `<button class="btn btn-danger delete-button">Delete</button>`;
                 bodyHtml += `</div>`;
                 bodyHtml += `</div>`;
@@ -44,6 +44,3 @@ async function getAllStudios(url,tagId) {
         console.log(`Error found when fetch ${url}: ${error.message}`)
     }
 }
-
-// CHIAMA LA FUNZIONE
-//
