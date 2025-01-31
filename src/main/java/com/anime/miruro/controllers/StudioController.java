@@ -57,14 +57,24 @@ public class StudioController {
     // UPDATE
     //
     @PostMapping("/update")
-    public void update(@RequestBody Studio studio) {
+    public void update(@RequestBody Map<String,String> studioData) {
+        Studio studio = new Studio();
+
+        studio.setId(Integer.parseInt(studioData.get("id")));
+        studio.setName(studioData.get("name"));
+        studio.setImage(studioData.get("image"));
+        studio.setDescription(studioData.get("description"));
+        studio.setDob(Integer.parseInt(studioData.get("dob")));
+
         studioService.update(studio);
     }
     
     // DELETE
     //
     @PostMapping("/delete")
-    public void delete(@RequestBody int id){
+    public void delete(@RequestBody Map<String,String> studioData){
+        int id = Integer.parseInt(studioData.get("id"));
+
         studioService.delete(id);
     }
 

@@ -12,11 +12,21 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(aut ->
-                aut
-                    .requestMatchers("/**").permitAll() // Allow public access to these endpoints
+                aut 
+                    .requestMatchers("/css/**", "/js/user/**", "/html/navbar/**", "/html/user/**", "/img/**").permitAll()
+                    .requestMatchers("/api/**", "/anime/**", "/trending/**").permitAll()
+                    .requestMatchers("/home").permitAll() // Allow public access to these endpoints
                     .anyRequest().authenticated() // Require authentication for other endpoints
             )
-            .csrf(csrf -> csrf.disable()); // Disable CSRF protection for simplicity
+            .formLogin(form -> 
+                form
+                    .permitAll() // Allow everyone to access the default login page
+            )
+            .logout(logout -> 
+                logout
+                    .permitAll() // Allow everyone to access the logout page
+            )
+            .csrf(csrf -> csrf.disable()); // Disable CSRF protection
 
         return http.build();
     }

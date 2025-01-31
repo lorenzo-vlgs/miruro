@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
+
 @Controller
 public class AppController {
 
@@ -56,4 +57,13 @@ public class AppController {
         return "/html/admin/admin-studio-form.html";
     }
 
+    @GetMapping("/admin/characters")
+    public String geCharacters() {
+        return "/html/admin/admin-character.html";
+    }
+    
+    @GetMapping("/admin/characters/form")
+    public String geCharactersForm() {
+        return "/html/admin/admin-character-form.html";
+    }
 }

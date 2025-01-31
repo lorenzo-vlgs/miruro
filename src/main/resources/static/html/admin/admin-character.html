@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miruro - Anime wiki</title>
+    <title>Miruro - Admin page</title>
     <link rel="icon" type="image/x-icon" href="/img/icon.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/general.css">
-    <link rel="stylesheet" href="/css/anime-detail.css">
 
     <!-- JS -->
-    <script src="/js/api/user/api-detail.js" defer></script>
+    <script src="/js/admin/admin-character.js"></script>
     
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -23,12 +22,27 @@
 </head>
 <body>
     <!-- Navbar -->
-    <script id="replace_with_navbar" src="/js/navbar/nav.js"></script>
+    <script id="replace_with_navbar" src="/js/navbar/nav-admin.js"></script>
+    <br><br>
 
-    <!-- Main content -->
-    <div class="container" id="anime-card">  
-      <!-- Animes will be placed here dynamically -->
+    <div class="container"> 
+        <div class="row">
+            <!-- Left Sidebar -->
+            <div class="col-md-3 vh-100 pt-5">
+                <br><br>
+                <div id="faq-list"></div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9">
+                <div class="container text-center">
+                    <br>
+                    <div class="row row-cols-3" id="">
+                        <!-- Animes will be placed here dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
 </body>
 </html>

@@ -44,4 +44,6 @@ async function getAllAnime() {
 }
 
 // Load genres and ratings on page load
-getAllAnime()
+document.addEventListener('DOMContentLoaded', () => {
+    getAllAnime();
+});

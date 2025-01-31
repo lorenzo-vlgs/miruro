@@ -1,8 +1,10 @@
 // Get anime id
+let id = null;
+
 document.addEventListener('DOMContentLoaded', () => {
     // Get the 'id' parameter from the URL
     const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
+    id = urlParams.get('id');
 
     // Use the 'id' variable to fetch and display anime details
     if (id) {

@@ -80,6 +80,7 @@ async function postGenre(url,genreData) {
         } else {
             console.error('Failed to save genre:', await response.text());
         }
+        
     } catch (error) {
         console.log(`Error sending data: ${error.message}`);
     }

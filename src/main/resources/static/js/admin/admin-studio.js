@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const faqItem = createFAQ(faq.question, faq.answer);
         faqList.appendChild(faqItem);
     });
+
+    getAllStudios('/api/studios/all', 'studios-list');
+    
 });
 
 function createFAQ(question, answer) {
@@ -47,4 +50,18 @@ function createFAQ(question, answer) {
     faqContainer.appendChild(answerElement);
     
     return faqContainer;
+}
+
+// NON FINITO
+function deleteStudioBtn(){
+
+    var modal = bootstrap.Modal.getInstance(document.getElementById('studioDelete'));
+    modal.hide();
+    
+    let id = document.getElementById('studioId').value;
+
+    let studioData = { "id": id};
+
+    deleteStudio('/api/studios/delete', studioData);
+    location.reload(); // Reload the page
 }
