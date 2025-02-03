@@ -33,7 +33,9 @@ public class GenreController {
     //
     @PostMapping("/save")
     public void save(@RequestBody Map<String,String> genreData){
-        Genre genre = new Genre(genreData.get("genreName"));
+        Genre genre = new Genre();
+        genre.setGenreName(genreData.get("genreName"));
+        
         genreService.save(genre);
     }
 

@@ -44,23 +44,10 @@ public class SecurityConfig {
         UserDetails john = User.builder()
             .username("john")
             .password("{noop}test123") // La password non è criptata
-            .roles("EMPLOYEE") // Ruolo assegnato
             .build();
-
-        UserDetails mary = User.builder()
-            .username("mary")
-            .password("{noop}test123")
-            .roles("EMPLOYEE", "MANAGER") // Ruoli assegnati
-            .build();
-
-        UserDetails susan = User.builder()
-            .username("susan")
-            .password("{noop}test123")
-            .roles("EMPLOYEE", "MANAGER", "ADMIN") // Ruoli assegnati
-            .build();
-
+            
         // Restituzione del bean di gestione degli utenti in memoria
-        return new InMemoryUserDetailsManager(john, mary, susan);
+        return new InMemoryUserDetailsManager(john);
     }
 
 }

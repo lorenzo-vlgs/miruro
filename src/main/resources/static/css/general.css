@@ -23,3 +23,7 @@
     z-index: 1050; /* Ensure it appears above other elements */
     margin-top: 100px;
 }
+
+.large-input {
+    width: 100%;
+}
