@@ -13,13 +13,15 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(aut ->
                 aut 
-                    .requestMatchers("/css/**", "/js/user/**", "/html/navbar/**", "/html/user/**", "/img/**").permitAll()
-                    .requestMatchers("/api/**", "/anime/**", "/trending/**").permitAll()
-                    .requestMatchers("/home").permitAll() // Allow public access to these endpoints
+                    .requestMatchers("/css/**", "/img/**").permitAll()
+                    .requestMatchers("/js/user/**", "/js/navbar/**", "/js/redirect/**", "/js/api/user/**").permitAll()
+                    .requestMatchers("/html/navbar/**", "/html/user/**").permitAll()
+                    .requestMatchers("/api/**", "/home/**", "/anime/**", "/trending/**").permitAll()
                     .anyRequest().authenticated() // Require authentication for other endpoints
             )
             .formLogin(form -> 
                 form
+                    .loginPage("/login")
                     .permitAll() // Allow everyone to access the default login page
             )
             .logout(logout -> 
