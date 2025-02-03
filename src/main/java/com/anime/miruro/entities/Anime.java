@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -41,8 +42,6 @@ public class Anime {
     
     public Anime() {}
 
-    
-    
     public Anime(String image, String name, String description, int episodes, Date rilascio) {
         this.image = image;
         this.name = name;
@@ -74,6 +73,10 @@ public class Anime {
     @OneToMany(mappedBy = "anime", cascade = {CascadeType.ALL})
     @JsonManagedReference
     private Set<Character> characters;
+
+    @ManyToMany(mappedBy = "animes", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonBackReference
+    private Set<User> users;
 
     // Aggiungi un genere nella lista
     //
