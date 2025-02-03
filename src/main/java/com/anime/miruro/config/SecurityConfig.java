@@ -1,11 +1,12 @@
 package com.anime.miruro.config;
 
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -39,15 +40,31 @@ public class SecurityConfig {
     }
 
     @Bean
+    public UserDetailsService userDetailsService(DataSource dataSource) {
+        JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager();
+        userDetailsManager.setDataSource(dataSource);
+
+        // Definisci le query per caricare gli utenti e i ruoli
+        userDetailsManager.setUsersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?");
+        userDetailsManager.setAuthoritiesByUsernameQuery("SELECT username, ruolo FROM roles WHERE username = ?");
+
+        return userDetailsManager;
+    }
+
+    /*
+     
+    @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
         // Definizione degli utenti
         UserDetails john = User.builder()
             .username("john")
             .password("{noop}test123") // La password non è criptata
             .build();
-            
+
         // Restituzione del bean di gestione degli utenti in memoria
         return new InMemoryUserDetailsManager(john);
     }
+
+    */
 
 }
