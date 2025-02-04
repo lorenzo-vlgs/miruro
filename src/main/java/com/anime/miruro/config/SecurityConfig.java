@@ -32,6 +32,7 @@ public class SecurityConfig {
                     .requestMatchers("/html/**","/css/**", "/img/**").permitAll()
                     .requestMatchers("/js/user/**", "/js/navbar/**", "/js/redirect.js", "/js/api/user/**", "/js/register.js").permitAll()
                     .requestMatchers("/register.html", "/sign-up").permitAll()
+                    .requestMatchers("/profile/**").permitAll()
                     .requestMatchers("/api/**", "/home/**", "/anime/**", "/trending/**").permitAll()
                     .requestMatchers("/js/admin/**", "js/api/admin/**").hasAuthority("ADMIN")
                     .requestMatchers("/admin/**").hasAuthority("ADMIN")
@@ -45,7 +46,11 @@ public class SecurityConfig {
             )
             .logout(logout -> 
                 logout
-                    .permitAll() // Allow everyone to access the logout page
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/home")
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
+                    .permitAll()
             )
             .csrf(csrf -> csrf.disable()); // Disable CSRF protection
 

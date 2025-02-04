@@ -21,6 +21,11 @@ public class AppController {
         return "html/user/homepage.html";
     }
 
+    @GetMapping("/profile")
+    public String getSettings(){
+        return"html/profile.html";
+    }
+
     //
     // ANIME RELATED ENDPOINTS
     //
