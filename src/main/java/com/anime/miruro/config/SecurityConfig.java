@@ -18,8 +18,9 @@ public class SecurityConfig {
             .authorizeHttpRequests(aut ->
                 aut 
                     .requestMatchers("/css/**", "/img/**").permitAll()
-                    .requestMatchers("/js/user/**", "/js/navbar/**", "/js/redirect/**", "/js/api/user/**").permitAll()
+                    .requestMatchers("/js/user/**", "/js/navbar/**", "/js/redirect.js", "/js/api/user/**", "/js/register.js").permitAll()
                     .requestMatchers("/html/navbar/**", "/html/user/**").permitAll()
+                    .requestMatchers("/register.html", "/sign-up").permitAll()
                     .requestMatchers("/api/**", "/home/**", "/anime/**", "/trending/**").permitAll()
                     .anyRequest().authenticated() // Require authentication for other endpoints
             )

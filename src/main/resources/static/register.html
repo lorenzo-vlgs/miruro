@@ -9,7 +9,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/form.css">
-
     <!-- JS -->
 
     <!-- Bootstrap Icons -->
@@ -40,11 +39,14 @@
         </div>
       </nav>
 
-    <div class="container text-center">
+      <div class="container text-center container-custom">
         <br><br><br>
         <div class="row align-items-center">
             <div class="col-md-6">
-                <form method="post" action="/login" class="form-custom">
+                <img src="/img/totoro-left.png" alt="totoro-left" style="width: 512px; height: 512px;">
+            </div>
+            <div class="col-md-6">
+                <form id="sign-up" method="post" action="/login" class="form-custom">
                     <div class="mb-3">
                         <label for="username" class="form-label label-custom">Username</label>
                         <input name="username" type="text" class="form-control large-input input-custom" id="username">
@@ -53,17 +55,12 @@
                         <label for="password" class="form-label label-custom">Password</label>
                         <input name="password" type="password" class="form-control large-input input-custom" id="password">
                     </div>
-                    <button type="submit" class="btn btn-secondary button-custom" aria-describedby="logged-register">Login</button>
-                    <div id="logged-register" class="form-text">
-                        Not logged in? <a href="/sign-up">Create Account</a>
-                    </div>
+                    <button type="submit" class="btn btn-secondary button-custom">Sign Up</button>
                 </form>
-            </div>
-            <div class="col-md-6">
-                <img src="/img/totoro-right.png" alt="totoro-left" style="width: 900px; height: 600px;">
             </div>
         </div>
     </div>
+    
    
 
 </body>

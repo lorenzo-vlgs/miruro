@@ -1,0 +1,22 @@
+.container-custom {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.form-custom {
+    padding: 20px;
+    background-color: #3a3a3a;
+    border-radius: 10px;
+}
+
+.label-custom {
+    color: #ffffff;
+}
+
+.input-custom {
+    border-radius: 5px;
+}
+
+.button-custom {
+    border-radius: 5px;
+}

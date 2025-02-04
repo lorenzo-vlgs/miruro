@@ -32,7 +32,7 @@ public class User {
 
     private String  username;
 
-    @Column(name = "user_password")
+    @Column(name = "password")
     private String password;
 
     private boolean enabled;

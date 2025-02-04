@@ -8,6 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class AppController {
 
+
+    //
+    // USER SIGN IN - SIGN UP ENDPOINTS 
+    //
+    @GetMapping("/sign-up")
+    public String getSignUp(){
+        return "/register.html";
+    }
     //
     // HOMEPAGE ENDPOINTS
     //
