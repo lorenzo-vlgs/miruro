@@ -2,6 +2,7 @@ package com.anime.miruro.config;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,22 +13,34 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+    private SuccessHandler successHandler;
+
+    
+    public SecurityConfig() {
+    }
+    
+    @Autowired
+    public SecurityConfig(SuccessHandler successHandler) {
+        this.successHandler = successHandler;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(aut ->
                 aut 
-                    .requestMatchers("/css/**", "/img/**").permitAll()
+                    .requestMatchers("/html/**","/css/**", "/img/**").permitAll()
                     .requestMatchers("/js/user/**", "/js/navbar/**", "/js/redirect.js", "/js/api/user/**", "/js/register.js").permitAll()
-                    .requestMatchers("/html/navbar/**", "/html/user/**").permitAll()
                     .requestMatchers("/register.html", "/sign-up").permitAll()
                     .requestMatchers("/api/**", "/home/**", "/anime/**", "/trending/**").permitAll()
-                    .anyRequest().authenticated() // Require authentication for other endpoints
+                    .requestMatchers("/js/admin/**", "js/api/admin/**").hasAuthority("ADMIN")
+                    .requestMatchers("/admin/**").hasAuthority("ADMIN")
             )
             .formLogin(form -> 
                 form
                     .loginPage("/login.html")
                     .loginProcessingUrl("/login")
+                    .successHandler(successHandler)
                     .permitAll()
             )
             .logout(logout -> 

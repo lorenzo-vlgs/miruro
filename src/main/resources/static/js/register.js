@@ -15,6 +15,8 @@ document.getElementById("signUp").addEventListener("submit", function(event){
 
     // console.log(JSON.stringify(userData))
     signUp('/api/users/save',userData);
+
+    window.location.href = "/login.html";
 });
 
 async function signUp(url,userData) {
