@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,26 +21,25 @@ public class StudioController {
     
     private StudioService studioService;
 
+    private ApplicationContext context;
+
     public StudioController() {
     }
 
     @Autowired
-    public StudioController(StudioService studioService) {
+    public StudioController(StudioService studioService, ApplicationContext context) {
         this.studioService = studioService;
+        this.context = context;
     }
 
     // CREATE
     //
     @PostMapping("/save")
     public void save(@RequestBody Map<String,String> studioData){
-        Studio studio = new Studio();
-
-        studio.setName(studioData.get("name"));
-        studio.setImage(studioData.get("image"));
-        studio.setDescription(studioData.get("description"));
-        studio.setDob(Integer.parseInt(studioData.get("dob")));
-        
+    
+        Studio studio = context.getBean(Studio.class, studioData);
         studioService.save(studio);
+    
     }
 
     // READ 
@@ -58,13 +58,8 @@ public class StudioController {
     //
     @PostMapping("/update")
     public void update(@RequestBody Map<String,String> studioData) {
-        Studio studio = new Studio();
-
+        Studio studio = context.getBean(Studio.class, studioData);
         studio.setId(Integer.parseInt(studioData.get("id")));
-        studio.setName(studioData.get("name"));
-        studio.setImage(studioData.get("image"));
-        studio.setDescription(studioData.get("description"));
-        studio.setDob(Integer.parseInt(studioData.get("dob")));
 
         studioService.update(studio);
     }
@@ -73,8 +68,8 @@ public class StudioController {
     //
     @PostMapping("/delete")
     public void delete(@RequestBody Map<String,String> studioData){
+        
         int id = Integer.parseInt(studioData.get("id"));
-
         studioService.delete(id);
     }
 

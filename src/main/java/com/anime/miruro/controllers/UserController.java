@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,13 +20,15 @@ import com.anime.miruro.services.UserService;
 public class UserController {
     
     private UserService userService;
+    private ApplicationContext context;
 
     public UserController() {
     }
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, ApplicationContext context) {
         this.userService = userService;
+        this.context = context;
     }
 
     @GetMapping("/all")
@@ -41,21 +44,15 @@ public class UserController {
     @PostMapping("/save")
     public void save(@RequestBody Map<String,String> userData) {
 
-        User user = new User();
-        user.setUsername(userData.get("username"));
-        user.setPassword(userData.get("password"));
-        user.setEnabled(Boolean.parseBoolean(userData.get("enabled")));
+        User user = context.getBean(User.class, userData);
         userService.save(user);
     }
 
     @PostMapping("/update")
     public void update(@RequestBody Map<String,String> userData) {
 
-        User user = new User();
+        User user = context.getBean(User.class, userData);
         user.setId(Integer.parseInt(userData.get("id")));
-        user.setUsername(userData.get("username"));
-        user.setPassword(userData.get("password"));
-        user.setEnabled(Boolean.parseBoolean(userData.get("enabled")));
 
         userService.save(user);
     }
