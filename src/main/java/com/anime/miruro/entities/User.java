@@ -65,6 +65,5 @@ public class User {
 
         this.animes.add(anime);
     }
-    
 }
 

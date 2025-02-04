@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/form.css">
     <!-- JS -->
+    <script src="/js/register.js" defer></script>
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -46,7 +47,7 @@
                 <img src="/img/totoro-left.png" alt="totoro-left" style="width: 512px; height: 512px;">
             </div>
             <div class="col-md-6">
-                <form id="sign-up" method="post" action="/login" class="form-custom">
+                <form id="signUp" method="post" action="api/users/save" class="form-custom">
                     <div class="mb-3">
                         <label for="username" class="form-label label-custom">Username</label>
                         <input name="username" type="text" class="form-control large-input input-custom" id="username">

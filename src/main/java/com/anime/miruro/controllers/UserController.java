@@ -15,7 +15,7 @@ import com.anime.miruro.entities.User;
 import com.anime.miruro.services.UserService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("api/users")
 public class UserController {
     
     private UserService userService;
@@ -45,7 +45,6 @@ public class UserController {
         user.setUsername(userData.get("username"));
         user.setPassword(userData.get("password"));
         user.setEnabled(Boolean.parseBoolean(userData.get("enabled")));
-
         userService.save(user);
     }
 

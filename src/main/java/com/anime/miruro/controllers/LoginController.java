@@ -13,4 +13,12 @@ public class LoginController {
     public String getLogin(){
         return "login.html";
     }
+
+    //
+    // USER SIGN UP ENDPOINT
+    //
+    @GetMapping("/sign-up")
+    public String getSignUp(){
+        return "/register.html";
+    }
 }
