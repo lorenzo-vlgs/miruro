@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,5 +61,19 @@ public class UserController {
     @PostMapping("/delete")
     public void delete(@RequestBody int id){
         userService.delete(id);
+    }
+
+    @GetMapping("/user-id")
+    public String getUserId() {
+        return getLoggedUserId();
+    }
+
+    private String getLoggedUserId() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof User) {
+            return ((User) principal).getId()+""; // Assuming your CustomUser class has a getId() method
+        } else {
+            return principal.toString();
+        }
     }
 }
