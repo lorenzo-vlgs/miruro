@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,23 +22,28 @@ public class GenreController {
     
     private GenreService genreService;
 
+    private ApplicationContext context;
+
     public GenreController() {
     }
 
     @Autowired
-    public GenreController(GenreService genreService) {
+    public GenreController(GenreService genreService, ApplicationContext context) {
         this.genreService = genreService;
-    }  
+        this.context = context;
+    }
+    
    
     // CREATE
     //
     @PostMapping("/save")
     public void save(@RequestBody Map<String,String> genreData){
-        Genre genre = new Genre();
-        genre.setGenreName(genreData.get("genreName"));
-        
+
+        Genre genre = context.getBean(Genre.class, genreData);
         genreService.save(genre);
+    
     }
+
 
     // READ 
     //
@@ -55,12 +61,12 @@ public class GenreController {
     //
     @PostMapping("/update")
     public void update(@RequestBody Map<String,String> genreData) {
-        Genre genre = new Genre();
 
-        genre.setGenreName(genreData.get("genreName"));
+        Genre genre = context.getBean(Genre.class, genreData);
         genre.setId(Integer.parseInt(genreData.get("id")));
 
         genreService.update(genre);
+        
     }
     
     // DELETE
