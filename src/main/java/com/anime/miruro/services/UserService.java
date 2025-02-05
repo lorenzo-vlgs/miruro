@@ -8,4 +8,7 @@ import com.anime.miruro.repositories.UserRepository;
 @Service
 public class UserService extends GenericService<Integer,User,UserRepository>{
     
+    public User findByUsername(String username){
+        return getRepository().findByUsername(username);
+    }
 }

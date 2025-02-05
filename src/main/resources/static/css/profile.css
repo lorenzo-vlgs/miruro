@@ -1,0 +1,29 @@
+.profile-container {
+    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/046/607/562/small_2x/blurred-spring-summer-nature-background-with-light-bokeh-abstract-blur-black-and-white-soft-colors-for-backdrop-defocused-effect-art-clean-black-white-illustration-free-space-for-design-photo.jpg'); /* Replace with the path to your image */
+    background-size: cover; /* Make the background cover the entire div */
+    background-position: center; /* Center the image */
+    padding: 20px; /* Adjust padding as needed */
+    color: white; /* Change text color to contrast with the background image */
+    position: relative; /* Needed for absolute positioning of text */
+    display: flex;
+    align-items: flex-end; /* Align text to the bottom */
+    height: 200px; /* Set the height of the container */
+    
+}
+.profile-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    z-index: -1;
+    
+    /* Add the blur effect */
+    filter: blur(1.5rem);
+    -webkit-filter: blur(1.5rem);
+}
+.profile-content {
+    z-index: 1; /* Ensure text is above the blurred background */
+}

@@ -1,6 +1,5 @@
 package com.anime.miruro.controllers;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,13 +63,11 @@ public class UserController {
         userService.delete(id);
     }
 
-    @GetMapping("/hello")
-    public Map<String, String> hello(@CurrentSecurityContext(expression="authentication?.name")
-                                 String username) {
-                                    
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Hello, " + username + "!");
-        return response;
+    @GetMapping("/username")
+    public User hello(@CurrentSecurityContext(expression="authentication?.name") String username) {
+        
+        User user = userService.findByUsername(username);
+        return user;
     }
 
 }

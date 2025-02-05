@@ -1,7 +1,10 @@
+// Variabili per ogni tag dinamico nella pagina profile
+let profileName = document.getElementById('profile-name'); 
+
 async function getUsername() {
     
     const response = await fetch(
-        '/api/users/hello',
+        '/api/users/username',
         {
             method: 'GET',
             headers: {'Content-type': 'application/json'}
@@ -11,6 +14,8 @@ async function getUsername() {
     const data = await response.json();
 
     console.log(JSON.stringify(data));
+    profileName.innerHTML = data.username;
+    
 
 }
 
