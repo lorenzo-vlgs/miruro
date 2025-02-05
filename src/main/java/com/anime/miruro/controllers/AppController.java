@@ -27,7 +27,7 @@ public class AppController {
     }
 
     //
-    // ANIME RELATED ENDPOINTS
+    // USER RELATED ENDPOINTS
     //
     @GetMapping("/anime")
     public String getAnimeDetail() {
@@ -71,4 +71,15 @@ public class AppController {
     public String geCharactersForm() {
         return "/html/admin/admin-character-form.html";
     }
+
+    @GetMapping("/admin/animes")
+    public String getAnimes(){
+        return "/html/admin/admin-anime.html";
+    }
+
+    @GetMapping("/admin/anime")
+    public String getAnime(){
+        return "/html/admin/admin-anime-form.html";
+    }
+
 }

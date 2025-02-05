@@ -9,6 +9,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="/css/form.css">
 
     <!-- JS -->
      <script src="/js/api/user/api-profile.js" defer></script>
@@ -44,9 +45,8 @@
             <i class="bi bi-person-circle" style="font-size: 1.5rem; color: #fff;"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-lg-end" id="auth-dropdown">
-                <li><a class="dropdown-item" href="/profile"><i class="bi bi-person"></i> Profile</a></li>
                 <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-right"></i> Log Out</a></li>
-        </ul>
+            </ul>
         </div>
         </div>
     </nav>
@@ -67,14 +67,39 @@
                       <button class="nav-link" id="nav-anime-tab" data-bs-toggle="tab" data-bs-target="#nav-anime" type="button" role="tab" aria-controls="nav-anime" aria-selected="false"><i class="bi bi-heart-fill"></i> Anime List</button>
                       <button class="nav-link" id="nav-settings-tab" data-bs-toggle="tab" data-bs-target="#nav-settings" type="button" role="tab" aria-controls="nav-settings" aria-selected="false"><i class="bi bi-gear-fill"></i> Settings</button>
                     </div>
-                  </nav>
-                  <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">...</div>
-                    <div class="tab-pane fade" id="nav-anime" role="tabpanel" aria-labelledby="nav-anime-tab" tabindex="0">...</div>
-                    <div class="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab" tabindex="0">...</div>
-                  </div>
-            </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                        <br><i class="bi bi-person-fill fs-1"></i> <span class="fw-semibold"> Edit Profile</span> <br><br>
+                        <!-- Edit profile form -->
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-6">
+                                <form method="post" action="/api/users/update" class="form-custom-small">
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label label-custom">Username</label>
+                                        <input name="username" type="text" class="form-control small-input" id="username">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label label-custom">Password</label>
+                                        <input name="password" type="password" class="form-control small-input" id="password">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="dob" class="form-label label-custom">Date of creation</label>
+                                        <input name="dob" type="text" class="form-control small-input" id="dob">
+                                    </div>
+                                    <button type="submit" class="btn btn-secondary button-custom">Save</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-anime" role="tabpanel" aria-labelledby="nav-anime-tab" tabindex="0">
+                        
+                    </div>
+                    <div class="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab" tabindex="0">
 
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

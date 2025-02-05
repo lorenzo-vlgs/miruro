@@ -6,3 +6,7 @@ function redirectToAnime(id) {
 function redirectToForm(id){
     window.location.href = `/admin/studios/form?id=${id}`;
 }
+
+function redirectToAnimeForm(id) {
+    window.location.href= `/admin/anime?id=${id}`;
+}

@@ -20,3 +20,12 @@
 .button-custom {
     border-radius: 5px;
 }
+
+.form-custom-small {
+    background-color: #f8f9fa1c; /* Light grey background color */
+    padding: 20px;
+    border-radius: 5px;
+}
+.small-input {
+    width: 50%; /* Adjust the width as needed */
+}

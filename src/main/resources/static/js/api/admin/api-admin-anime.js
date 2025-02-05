@@ -1,7 +1,7 @@
 async function getAllAnime() {
     try {
         const response = await fetch(
-            'api/animes/all',
+            '/api/animes/all',
             {
                 method: 'GET',
                 headers: { "Content-Type": "application/json" }
@@ -15,7 +15,7 @@ async function getAllAnime() {
             let bodyHtml = '';
 
             for (let anime of data) {
-                bodyHtml += `<div class="anime-card" onclick="redirectToAnime(${anime.id})">`;
+                bodyHtml += `<div class="anime-card" onclick="redirectToAnimeForm(${anime.id})">`;
                 bodyHtml += `<div class="anime-image"><img src="${anime.image}" alt="${anime.name}"></div>`;
                 bodyHtml += `<div class="anime-details">`;
                 bodyHtml += `<h2 class="anime-title">${anime.name}</h2>`;

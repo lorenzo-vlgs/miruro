@@ -19,16 +19,29 @@ async function loadNavbar() {
 async function checkAuthStatus() {
     try {
         const response = await fetch('/api/auth/status');
-        const isAuthenticated = await response.json();
+        const data = await response.json();
+        const isAuthenticated = data.isAuthenticated;
+        const isAdmin = data.isAdmin;
 
         const dropdownMenu = document.getElementById('auth-dropdown');
         dropdownMenu.innerHTML = '';
 
         if (isAuthenticated) {
-            dropdownMenu.innerHTML = `
+            let menuItems = `
                 <li><a class="dropdown-item" href="/profile"><i class="bi bi-person"></i> Profile</a></li>
+            `;
+
+            if (isAdmin) {
+                menuItems += `
+                    <li><a class="dropdown-item" href="/admin"><i class="bi bi-person-video3"></i> View Admin</a></li>
+                `;
+            }
+
+            menuItems += `
                 <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-right"></i> Log Out</a></li>
             `;
+
+            dropdownMenu.innerHTML = menuItems;
         } else {
             dropdownMenu.innerHTML = `
                 <li><a class="dropdown-item" href="/login.html"><i class="bi bi-box-arrow-in-right"></i> Log In</a></li>
