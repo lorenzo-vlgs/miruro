@@ -1,11 +1,12 @@
 package com.anime.miruro.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,17 +64,13 @@ public class UserController {
         userService.delete(id);
     }
 
-    @GetMapping("/user-id")
-    public String getUserId() {
-        return getLoggedUserId();
+    @GetMapping("/hello")
+    public Map<String, String> hello(@CurrentSecurityContext(expression="authentication?.name")
+                                 String username) {
+                                    
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Hello, " + username + "!");
+        return response;
     }
 
-    private String getLoggedUserId() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof User) {
-            return ((User) principal).getId()+""; // Assuming your CustomUser class has a getId() method
-        } else {
-            return principal.toString();
-        }
-    }
 }
