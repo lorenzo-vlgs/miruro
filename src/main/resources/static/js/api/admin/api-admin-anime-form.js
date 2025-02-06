@@ -109,3 +109,24 @@ async function getGenres(url) {
 }
 
 
+async function saveAnime(url,animeData) {
+    
+    try {
+        
+        const response = await fetch(url, {
+            method:'POST',
+            headers: {'Concept-type': 'application/json'},
+            body: JSON.stringify(animeData)
+        });
+        
+        if (response.ok) {
+            console.log('Anime saved');
+        } else {
+            console.error(`Error during fetch: `, await response.text());
+        }
+
+    } catch (error) {
+        console.error(`Error found when fetching ${url}: ${error.message}`)
+    }
+}
+
