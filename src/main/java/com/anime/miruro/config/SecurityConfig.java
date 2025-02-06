@@ -34,7 +34,7 @@ public class SecurityConfig {
                     .requestMatchers("/register.html", "/sign-up").permitAll()
                     .requestMatchers("/profile/**").permitAll()
                     .requestMatchers("/api/**", "/home/**", "/anime/**", "/trending/**").permitAll()
-                    .requestMatchers("/js/admin/**", "js/api/admin/**").hasAuthority("ADMIN")
+                    .requestMatchers("/js/admin/**", "/js/api/admin/**").hasAuthority("ADMIN")
                     .requestMatchers("/admin/**").hasAuthority("ADMIN")
             )
             .formLogin(form -> 
