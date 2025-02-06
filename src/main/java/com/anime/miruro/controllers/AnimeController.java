@@ -58,7 +58,8 @@ public class AnimeController {
     // UPDATE
     //
     @PostMapping("/update")
-    public void update(@RequestBody Anime anime) {
+    public void update(@RequestBody Map<String,Object> animeData) {
+        Anime anime = context.getBean(Anime.class, animeData);
         animeService.update(anime);
     }
     
