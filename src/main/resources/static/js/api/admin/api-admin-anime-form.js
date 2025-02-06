@@ -9,12 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Use the 'id' variable to fetch and display anime details
     if (id > 0) {
         getAnime(id);
-    } else {
-        console.error('Anime ID not found in the URL');
     }
 
-
-    console.log();
 });
 
 async function getAnime() {
@@ -109,13 +105,13 @@ async function getGenres(url) {
 }
 
 
-async function saveAnime(url,animeData) {
+async function postAnime(url,animeData) {
     
     try {
         
         const response = await fetch(url, {
             method:'POST',
-            headers: {'Concept-type': 'application/json'},
+            headers: {'Content-type': 'application/json'},
             body: JSON.stringify(animeData)
         });
         
@@ -126,7 +122,7 @@ async function saveAnime(url,animeData) {
         }
 
     } catch (error) {
-        console.error(`Error found when fetching ${url}: ${error.message}`)
+        console.error(`Error found when fetching: ${error.message}`)
     }
 }
 

@@ -1,8 +1,10 @@
 package com.anime.miruro.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,23 +17,29 @@ import com.anime.miruro.services.AnimeService;
 
 
 @RestController
-@RequestMapping("api/animes")
+@RequestMapping("/api/animes")
 public class AnimeController {
     
     private AnimeService animeService;
+
+    private ApplicationContext context;
 
     public AnimeController() {
     }
 
     @Autowired
-    public AnimeController(AnimeService animeService) {
+    public AnimeController(AnimeService animeService, ApplicationContext context) {
         this.animeService = animeService;
+        this.context = context;
     }
 
     // CREATE
     //
     @PostMapping("/save")
-    public void save(@RequestBody Anime anime){
+    public void save(@RequestBody Map<String,Object> animeData){
+
+        Anime anime = context.getBean(Anime.class, animeData);
+
         animeService.save(anime);
     }
 

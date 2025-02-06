@@ -1,3 +1,13 @@
+// Get anime id
+let idUrl = null;
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Get the 'id' parameter from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    idUrl = urlParams.get('id');
+
+});
+
 //
 // Adds a new select dropdown when the button is clicked
 //
@@ -52,9 +62,37 @@ document.getElementById('animeImage').addEventListener('input', function() {
 //
 // Saves the anime
 //
+document.getElementById('anime-form').addEventListener('submit', function(event) {
+    event.preventDefault();
 
 
-// const selectedGenres = [];
-// document.querySelectorAll('#genre-container select').forEach(select => {
-//     selectedGenres.push(select.value);
-// });
+    // Saves all the genres in a list
+    const selectedGenres = [];
+    document.querySelectorAll('#genre-container select').forEach(select => {
+        selectedGenres.push(select.value);
+    });
+
+    //Assigns all the values
+    const name = document.getElementById('animeTitle').value;
+    const image = document.getElementById('animeImage').value;
+    const description = document.getElementById('description').value;
+    const episodes = document.getElementById('episodes').value;
+    const dob = document.getElementById('dob').value;
+
+    const animeData = {
+        "id": idUrl,
+        "name": name,
+        "image": image,
+        "description": description,
+        "genres": selectedGenres,
+        "episodes": episodes,
+        "dob": dob
+    };
+
+    const url = idUrl === "0" ? '/api/animes/save' : '/api/animes/update';
+    // console.log(url);
+    postAnime(url,animeData);
+});
+
+
+
