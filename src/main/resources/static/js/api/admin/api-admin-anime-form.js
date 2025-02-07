@@ -36,43 +36,86 @@ async function getAnime() {
         document.getElementById('dob').value = anime.rilascio;
         document.getElementById('imageDisplay').src = anime.image;
 
-        // Fetch all genres
+        // Fetch all genres and studios
         const genres = await getGenres('/api/genres/all');
+        const studios = await getStudios('/api/studios/all');
 
         // Populate existing genres
         const genreContainer = document.getElementById('genre-container');
-        genreContainer.innerHTML = ""; // Clear previous genres (if any)
-
+        genreContainer.innerHTML = "";
         anime.genres.forEach((animeGenre, index) => {
             genreCount++;
             const genreDiv = document.createElement('div');
             genreDiv.classList.add('d-flex', 'align-items-center', 'mt-2');
             genreDiv.innerHTML = `
-                <span class="me-2">${genreCount}.</span>
+                <span class="me-2 genre-number">${genreCount}.</span>
                 <select class="form-select">
                 </select>
+                <button type="button" class="btn-close ms-2" aria-label="Close"></button>
             `;
 
             const selectElement = genreDiv.querySelector('select');
+            const closeButton = genreDiv.querySelector('.btn-close');
 
-            // Populate dropdown with all available genres
             genres.forEach(genre => {
                 const option = document.createElement('option');
                 option.value = genre.id;
                 option.textContent = genre.genreName;
                 if (genre.id === animeGenre.id) {
-                    option.selected = true; // Preselect the current anime genre
+                    option.selected = true;
                 }
                 selectElement.appendChild(option);
             });
 
+            closeButton.addEventListener('click', () => {
+                genreDiv.remove();
+                updateGenreNumbers();
+            });
+
             genreContainer.appendChild(genreDiv);
+        });
+
+        // Populate existing studios
+        const studioContainer = document.getElementById('studio-container');
+        studioContainer.innerHTML = "";
+        anime.studios.forEach((animeStudio, index) => {
+            studioCount++;
+            const studioDiv = document.createElement('div');
+            studioDiv.classList.add('d-flex', 'align-items-center', 'mt-2');
+            studioDiv.innerHTML = `
+                <span class="me-2 studio-number">${studioCount}.</span>
+                <select class="form-select">
+                </select>
+                <button type="button" class="btn-close ms-2" aria-label="Close"></button>
+            `;
+
+            const selectElement = studioDiv.querySelector('select');
+            const closeButton = studioDiv.querySelector('.btn-close');
+
+            studios.forEach(studio => {
+                const option = document.createElement('option');
+                option.value = studio.id;
+                option.textContent = studio.name;
+                if (studio.id === animeStudio.id) {
+                    option.selected = true;
+                }
+                selectElement.appendChild(option);
+            });
+
+            closeButton.addEventListener('click', () => {
+                studioDiv.remove();
+                updateStudioNumbers();
+            });
+
+            studioContainer.appendChild(studioDiv);
         });
 
     } catch (error) {
         console.log('Error fetching anime:', error.message);
     }
 }
+
+
 
 
 async function getGenres(url) {
@@ -104,6 +147,34 @@ async function getGenres(url) {
     return data;
 }
 
+async function getStudios(url) {
+    
+    let studioData = {"test": "testino"};
+
+    try {
+        
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {'Content-type': 'application/json'}
+        });
+
+
+        if (response.ok) {
+
+            studioData = await response.json();
+
+        } else {
+            
+            console.error(`Error when fetching ${url}: ${await response.text()}`)
+
+        }
+
+    } catch (error) {
+        console.error(`Error fetching animes on ${url}: ${error.message}`)    
+    }
+
+    return studioData;
+}
 
 async function postAnime(url,animeData) {
     

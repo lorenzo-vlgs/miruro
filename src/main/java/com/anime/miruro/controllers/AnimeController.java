@@ -39,7 +39,6 @@ public class AnimeController {
     public void save(@RequestBody Map<String,Object> animeData){
 
         Anime anime = context.getBean(Anime.class, animeData);
-
         animeService.save(anime);
     }
 

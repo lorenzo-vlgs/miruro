@@ -17,21 +17,23 @@ import com.anime.miruro.entities.Genre;
 import com.anime.miruro.entities.Studio;
 import com.anime.miruro.entities.User;
 import com.anime.miruro.services.GenreService;
+import com.anime.miruro.services.StudioService;
 
 @Configuration
 public class EntityFactory {
     
 
     private GenreService genreService;
-
+    private StudioService studioService;
     
 
     public EntityFactory() {
     }
 
     @Autowired
-    public EntityFactory(GenreService genreService) {
+    public EntityFactory(GenreService genreService, StudioService studioService) {
         this.genreService = genreService;
+        this.studioService = studioService;
     }
 
 
@@ -115,6 +117,27 @@ public Anime newAnime(Map<String,Object> params){
     }
 
     anime.setGenres(genres);
+
+
+    // Handle studios list properly
+    List<Integer> studioId;
+    if (params.get("studios") instanceof List<?>) {
+        studioId = ((List<?>) params.get("studios"))
+                .stream()
+                .map(s -> (s instanceof Integer) ? (Integer) s : Integer.parseInt(s.toString()))
+                .toList();
+    } else {
+        studioId = new ArrayList<>();
+    }
+
+    Set<Studio> studios = new  HashSet<>();
+    for (Integer sId : studioId) {
+        Studio studio = studioService.findById(sId);
+        studios.add(studio);
+    }
+
+    anime.setStudios(studios);
+    
     return anime;
 }
 

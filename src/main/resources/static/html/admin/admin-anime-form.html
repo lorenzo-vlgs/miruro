@@ -25,47 +25,58 @@
 <body>
     <!-- Navbar -->
     <script id="replace_with_navbar" src="/js/navbar/nav-admin.js"></script>
-    <br><br><br><br><br>
+    <br><br><br>
 
     <div class="container" id="anime-card">
         <form id="anime-form" action="#" method="post">
-
+    
             <div class="row">
                 <div class="col-9 fs-2 fw-bold">
                     <input id="animeTitle" type="text" class="form-control-plaintext" placeholder="Title here...">
                 </div>
                 <div class="col-4">
                     <div class="anime-image">
-                        <input id="animeImage" type="text" class="form-control-plaintext" id="animeImage" placeholder="https://myanimelist.net">
+                        <input id="animeImage" type="text" class="form-control-plaintext" placeholder="https://myanimelist.net">
                         <img id="imageDisplay" class="anime-image" src="https://static.vecteezy.com/system/resources/thumbnails/008/695/917/small_2x/no-image-available-icon-simple-two-colors-template-for-no-image-or-picture-coming-soon-and-placeholder-illustration-isolated-on-white-background-vector.jpg" alt="Anime Image">
                     </div>
                     <br>
                     <button type="submit" id="submitAnime" class="btn btn-outline-light"><i class="bi bi-floppy"></i> Save</button>
                 </div>
                 <div class="col-6">
-                <div class="bottom-outline fs-4 fw-semibold">Synopsis</div>
-                <br>
-                <textarea id="description" class="form-control-plaintext" style="height: 400px"></textarea>
-                <br><br>
-                <p class="fs-4 fw-semibold bottom-outline">Information</p>
-                <span>Genres: </span>
-                <button type="button" id="addGenre" class="btn btn-sm btn-secondary ms-2">+</button>
-                <div id="genre-container" class="mt-2"></div>
-                
-                <div class="d-flex mt-3">
-                    <div class="flex-fill me-3">
-                        <label for="episodes" class="form-label">Episodes:</label>
-                        <input id="episodes" type="number" class="form-control-plaintext" id="episodes" placeholder="number here...">
+                    <div class="bottom-outline fs-4 fw-semibold">Synopsis</div>
+                    <br>
+                    <textarea id="description" class="form-control-plaintext" style="height: 400px"></textarea>
+                    <br><br>
+                    <p class="fs-4 fw-semibold bottom-outline">Information</p>
+                    
+                    <!-- Genre Section -->
+                    <span>Genres: </span>
+                    <button type="button" id="addGenre" class="btn btn-sm btn-secondary ms-2">+</button>
+                    <div id="genre-container" class="mt-2"></div>
+    
+                    <!-- Studio Section -->
+                    <br>
+                    <span>Studios: </span>
+                    <button type="button" id="addStudio" class="btn btn-sm btn-secondary ms-2">+</button>
+                    <div id="studio-container" class="mt-2"></div>
+                    
+                    <br>
+                    <div class="d-flex mt-3">
+                        <div class="flex-fill me-3">
+                            <label for="episodes" class="form-label">Episodes:</label>
+                            <input id="episodes" type="number" class="form-control-plaintext" placeholder="number here...">
+                        </div>
+                        <div class="flex-fill">
+                            <label for="releaseDate" class="form-label">Release date:</label>
+                            <input id="dob" type="date" class="form-control-plaintext" placeholder="date here...">
+                        </div>    
                     </div>
-                    <div class="flex-fill">
-                        <label for="releaseDate" class="form-label">Release date:</label>
-                        <input id="dob" type="date" class="form-control-plaintext" id="releaseDate" placeholder="date here...">
-                    </div>    
                 </div>
             </div>
-
+    
         </form>
     </div>
+    
 
 </body>
 </html>

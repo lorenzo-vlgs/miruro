@@ -29,40 +29,47 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <img id="imageDisplay" src="" alt="">
+            <!-- Image Section -->
+            <div class="col-lg-6 col-md-12 text-center">
+                <img id="imageDisplay" src="" alt="" class="img-fluid">
             </div>
-            <div class="col-md-6">  
+            
+            <!-- Form Section -->
+            <div class="col-lg-6 col-md-12">  
                 <form class="row g-3" id="saveStudio">
                     <input type="number" class="form-control" id="studioId" value="-1" hidden>
+
                     <div class="col-md-8">
                         <label for="studioName" class="form-label">Studio's name</label>
-                        <input type="text" class="form-control" id="studioName">
+                        <input type="text" class="form-control w-100" id="studioName">
                     </div>
                     <div class="col-md-4">
-                        <label for="studioDob" class="form-label">Studio's estabilishment</label>
+                        <label for="studioDob" class="form-label">Studio's establishment</label>
                         <input type="number" class="form-control" id="studioDob">
                     </div>
+
                     <div class="col-12">
                         <label for="studioImage" class="form-label">Image</label>
-                        <input type="" class="form-control" id="studioImage" placeholder="https://myanimelist.net" aria-describedby="imageGuide">
+                        <input type="url" class="form-control" id="studioImage" placeholder="https://myanimelist.net" aria-describedby="imageGuide">
                     </div>
+                    
                     <div id="imageGuide" class="form-text">
                         <p>1. Search the studio on any website</p>
-                        <p>2. Copy the image's url</p>
-                        <p>3. Paste the url on the input above</p>
+                        <p>2. Copy the image's URL</p>
+                        <p>3. Paste the URL in the input above</p>
                     </div>
-                    <div class="col-12 form-floating">
-                        <p>Description</p>
-                        <textarea class="form-control" placeholder="Leave a comment here" id="studioDescription" style="height: 400px"></textarea>
-                      </div>
+
                     <div class="col-12">
-                        <button type="submit" class="btn btn-secondary"><i class="bi bi-floppy"></i> Save</button>
+                        <label for="studioDescription" class="form-label">Description</label>
+                        <textarea class="form-control" placeholder="Leave a comment here" id="studioDescription" style="height: 400px"></textarea>
+                    </div>
+
+                    <div class="col-12 text-center text-md-start">
+                        <button type="submit" class="btn btn-secondary w-100 w-md-auto"><i class="bi bi-floppy"></i> Save</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    
 </body>
 </html>
