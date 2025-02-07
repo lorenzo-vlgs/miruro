@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
         faqList.appendChild(faqItem);
     });
 
-    getAllStudios('/api/studios/all', 'studios-list');
     
 });
 
@@ -54,14 +53,19 @@ function createFAQ(question, answer) {
 
 // NON FINITO
 function deleteStudioBtn(){
-
+    
     var modal = bootstrap.Modal.getInstance(document.getElementById('studioDelete'));
     modal.hide();
     
     let id = document.getElementById('studioId').value;
-
+    
     let studioData = { "id": id};
-
+    
     deleteStudio('/api/studios/delete', studioData);
     location.reload(); // Reload the page
+}
+
+window.onload = () => {
+
+    getAllStudios('/api/studios/all', 'studios-list');
 }

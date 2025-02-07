@@ -110,13 +110,40 @@ async function getAnime() {
             studioContainer.appendChild(studioDiv);
         });
 
+
+        //Populate with the existing characters
+        const charactersContainer = document.getElementById('character-container');
+        let bodyHtml = '';
+
+        bodyHtml += `<div class="row">`;
+        anime.characters.forEach((character, index) => {
+            // Open a new row every 2 characters
+            if (index % 2 === 0 && index !== 0) {
+                bodyHtml += `<hr><hr>`;
+                bodyHtml += `</div><div class="row">`;
+            }
+            
+            bodyHtml += `
+                <div class="col-md-6">
+                    <div class="character text-center">
+                        <img src="${character.image}" alt="${character.name}" class="img-fluid">
+                        <div class="fw-semibold fs-5"> ${character.name}</div>
+                        <div> ${character.role}</div>
+                    </div>
+                </div>
+            `;
+        });
+        bodyHtml += `</div>`; // Close last row
+
+charactersContainer.innerHTML = bodyHtml;
+
+
+        charactersContainer.innerHTML = bodyHtml;
+
     } catch (error) {
         console.log('Error fetching anime:', error.message);
     }
 }
-
-
-
 
 async function getGenres(url) {
     

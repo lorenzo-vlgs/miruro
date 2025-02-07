@@ -1,4 +1,4 @@
-package com.anime.miruro.controllers;
+package com.anime.miruro.controllers.RESTful;
 
 import java.util.List;
 import java.util.Map;

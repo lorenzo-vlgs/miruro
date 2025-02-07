@@ -42,8 +42,3 @@ async function getAllAnime() {
         console.log('Error fetching animes: ' + error.message);
     }
 }
-
-// Load genres and ratings on page load
-document.addEventListener('DOMContentLoaded', () => {
-    getAllAnime();
-});

@@ -50,3 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
         faqList.appendChild(faqItem);
     });
 });
+
+window.onload = () => {
+
+    getAllAnime();
+}

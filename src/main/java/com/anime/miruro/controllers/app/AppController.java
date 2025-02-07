@@ -1,4 +1,4 @@
-package com.anime.miruro.controllers;
+package com.anime.miruro.controllers.app;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
