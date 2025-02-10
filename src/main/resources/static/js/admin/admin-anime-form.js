@@ -151,7 +151,7 @@ document.getElementById('anime-form').addEventListener('submit', function(event)
     const image = document.getElementById('animeImage').value;
     const description = document.getElementById('description').value;
     const episodes = document.getElementById('episodes').value;
-    const dob = document.getElementById('dob').value;
+    const dob = document.getElementById('dob').value;    
 
     const animeData = {
         "id": idUrl,
@@ -170,8 +170,5 @@ document.getElementById('anime-form').addEventListener('submit', function(event)
 
     window.location.href = '/admin/animes';
 });
-
-
-
 
 

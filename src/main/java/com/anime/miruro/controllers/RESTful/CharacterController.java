@@ -10,21 +10,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.anime.miruro.entities.Anime;
 import com.anime.miruro.entities.Character;
+import com.anime.miruro.services.AnimeService;
 import com.anime.miruro.services.CharacterService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("api/characters")
 public class CharacterController {
     
     private CharacterService characterService;
+    private AnimeService animeService;
 
     public CharacterController() {
     }
 
     @Autowired
-    public CharacterController(CharacterService characterService) {
+    public CharacterController(CharacterService characterService, AnimeService animeService) {
         this.characterService = characterService;
+        this.animeService = animeService;
     }
 
     // CREATE
@@ -63,6 +69,14 @@ public class CharacterController {
     @GetMapping("/count")
     public Long getCharactersCount(){
         return characterService.getCount();
+    }
+    
+    @GetMapping("/byAnime")
+    public List<Character> getByAnime(@RequestParam("idAnime") int param) {
+
+        Anime anime = animeService.findById(param);
+
+        return characterService.findByAnime(anime);
     }
     
 }

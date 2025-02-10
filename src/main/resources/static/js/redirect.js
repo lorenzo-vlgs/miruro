@@ -10,3 +10,7 @@ function redirectToForm(id){
 function redirectToAnimeForm(id) {
     window.location.href= `/admin/anime?id=${id}`;
 }
+
+function redirectToCharacterForm(id) {
+    window.location.href= `/admin/characters/form?id=${id}`;
+}

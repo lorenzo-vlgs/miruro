@@ -48,3 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
         faqList.appendChild(faqItem);
     });
 });
+
+
+window.onload = () => {
+    getAnimeNames('/api/animes/all');
+}
