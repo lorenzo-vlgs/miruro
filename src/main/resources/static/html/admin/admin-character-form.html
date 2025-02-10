@@ -8,6 +8,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="/css/scale-image.css">
 
     <!-- JS -->
 
@@ -22,7 +23,48 @@
 <body>
     <!-- Navbar -->
     <script id="replace_with_navbar" src="/js/navbar/nav-admin.js"></script>
-    <br><br>
+    <br><br><br>
+
+    <div class="container" id="anime-card">
+        <form id="anime-form" action="#" method="post">
+    
+            <div class="row">
+                <div class="col-9 fs-2 fw-bold">
+                    <input id="animeTitle" type="text" class="form-control-plaintext" placeholder="Name here...">
+                </div>
+                <div class="col-4">
+                    <div class="anime-image">
+                        <input id="animeImage" type="text" class="form-control-plaintext" placeholder="https://myanimelist.net">
+                        <img id="imageDisplay" class="anime-image" src="https://static.vecteezy.com/system/resources/thumbnails/008/695/917/small_2x/no-image-available-icon-simple-two-colors-template-for-no-image-or-picture-coming-soon-and-placeholder-illustration-isolated-on-white-background-vector.jpg" alt="Anime Image">
+                    </div>
+                    <br>
+                    <button type="submit" id="submitAnime" class="btn btn-outline-light"><i class="bi bi-floppy"></i> Save</button>
+                </div>
+                <div class="col-6">
+                    <div class="bottom-outline fs-4 fw-semibold">Synopsis</div>
+                    <br>
+                    <textarea id="description" class="form-control-plaintext" style="height: 400px"></textarea>
+
+                    <br>
+                    <div class="d-flex justify-content-between fs-4 fw-semibold bottom-outline">
+                        Information 
+                    </div>
+                    
+                    <br>
+                    <div class="d-flex mt-3">
+                        <div class="flex-fill me-3">
+                            <label for="role" class="form-label">Role:</label>
+                            <input id="role" type="text" class="form-control-plaintext" placeholder="role here...">
+                        </div>
+                    </div>
+
+                    <br>
+                    
+                </div>
+            </div>
+    
+        </form>
+    </div>
 
 </body>
 </html>
