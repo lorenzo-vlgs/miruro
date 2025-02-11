@@ -1,8 +1,10 @@
 package com.anime.miruro.controllers.RESTful;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,19 +26,24 @@ public class CharacterController {
     private CharacterService characterService;
     private AnimeService animeService;
 
+    private ApplicationContext context;
+
     public CharacterController() {
     }
 
     @Autowired
-    public CharacterController(CharacterService characterService, AnimeService animeService) {
+    public CharacterController(CharacterService characterService, AnimeService animeService, ApplicationContext context) {
         this.characterService = characterService;
         this.animeService = animeService;
+        this.context = context;
     }
 
     // CREATE
     //
     @PostMapping("/save")
-    public void save(@RequestBody Character character){
+    public void save(@RequestBody Map<String,String> characterData){
+
+        Character character = context.getBean(Character.class, characterData);
         characterService.save(character);
     }
 

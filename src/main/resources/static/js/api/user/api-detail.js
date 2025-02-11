@@ -54,20 +54,27 @@ async function getAnime() {
             bodyHtml += `</div>`; // Closing col-4 div
 
             bodyHtml += `<div class="col-7"><br><br><div class="bottom-outline fs-4 fw-semibold">Characters</div><br>`;
+            bodyHtml += `<div class="row justify-content-center" style="margin-bottom:100px;">`
 
-            bodyHtml += `<div class="row">`;    
-            for (let i = 0; i < anime.characters.length; i++) {
-                if (i % 3 === 0 && i !== 0) {
-                    bodyHtml += `</div><div class="row">`;
-                }
-                bodyHtml += `<div class="col-md-4">`;
-                bodyHtml += `<div class="character"><img src="${anime.characters[i].image}" alt="${anime.characters[i].name}"><span class="fw-semibold"> ${anime.characters[i].name}</span><span class="fs-6">  ${anime.characters[i].role}</span></div>`;
-                bodyHtml += `</div>`;
+            bodyHtml += `<div class="row">`;
+            anime.characters.forEach((character, index) => {
+            // Start a new row after every 6 characters
+            if (index % 6 === 0 && index !== 0) {
+                bodyHtml += `</div><div class="row">`;
             }
+
+            bodyHtml += `
+                <div class="col-2 d-flex flex-column align-items-center">
+                    <img src="${character.image}" alt="${character.name}" class="img-fluid rounded"
+                        style="width: 120px; height: 160px; object-fit: cover;">
+                    <div class="fw-semibold fs-5 text-center mt-2">${character.name}</div>
+                    <div class="text-muted text-center">${character.role}</div>
+                </div>
+            `;
+            });
+
             bodyHtml += `</div>`;
-
-
-            bodyHtml += `</div>`; //Closing row div
+            bodyHtml += `</div>`;
 
             animeList.innerHTML = bodyHtml;
 
