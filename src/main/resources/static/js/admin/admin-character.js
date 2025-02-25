@@ -58,5 +58,6 @@ window.onload = () => {
 function delCharacter(id) {
     
     alert('Are you sure you want to delete this character?');
-    console.log(`ID: ${id}`);
+    deleteCharacter(`/api/characters/delete`,id);
+    location.reload();
 }

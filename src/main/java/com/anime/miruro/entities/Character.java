@@ -31,7 +31,7 @@ public class Character {
 
     private String role;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "anime_id")
     @JsonBackReference
     private Anime anime;
