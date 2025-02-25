@@ -50,6 +50,9 @@ public class Character {
         return "Character [id=" + id + ", name=" + name + ", role=" + role + "]";
     }
 
+    public int getAnimeId() {
+        return anime != null ? anime.getId() : 0;
+    }
     
     
 }

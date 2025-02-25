@@ -53,3 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
 window.onload = () => {
     getAnimeNames('/api/animes/all');
 }
+
+/* JS STARTS HERE */
+function delCharacter(id) {
+    
+    alert('Are you sure you want to delete this character?');
+    console.log(`ID: ${id}`);
+}

@@ -1,0 +1,23 @@
+.character-container {
+    position: relative;
+}
+
+.character-button {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+}
+
+.character-container:hover .character-button {
+    display: block;
+}
+
+.character-container img {
+    transition: transform 0.3s ease;
+}
+
+.character-container:hover img {
+    filter: brightness(0.8);
+}

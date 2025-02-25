@@ -18,7 +18,6 @@ import com.anime.miruro.services.AnimeService;
 import com.anime.miruro.services.CharacterService;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @RestController
 @RequestMapping("api/characters")
 public class CharacterController {
@@ -80,10 +79,7 @@ public class CharacterController {
     
     @GetMapping("/byAnime")
     public List<Character> getByAnime(@RequestParam("idAnime") int param) {
-
         Anime anime = animeService.findById(param);
-
         return characterService.findByAnime(anime);
     }
-    
 }

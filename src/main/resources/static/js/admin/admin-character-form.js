@@ -8,8 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // idChar = urlParams.get('idCharacter');
     idAnime = urlParams.get('id');
 
+    if (urlParams.get('idChar')) {
+        idChar = urlParams.get('idChar');
+        console.log(" ID CHAR: " + idChar);
+    }
+
     if (idChar > 0) {
-        getCharactersById(idChar);
+        getCharacterById(idChar);
     }
 });
 
