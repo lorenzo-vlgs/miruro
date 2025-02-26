@@ -57,7 +57,8 @@ window.onload = () => {
 /* JS STARTS HERE */
 function delCharacter(id) {
     
-    alert('Are you sure you want to delete this character?');
-    deleteCharacter(`/api/characters/delete`,id);
-    location.reload();
+    if (confirm('Are you sure you want to delete this character?')) {
+        deleteCharacter(`/api/characters/delete`,id);
+        location.reload();
+    }
 }

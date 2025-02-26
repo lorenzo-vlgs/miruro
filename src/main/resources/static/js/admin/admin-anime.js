@@ -51,6 +51,27 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+async function deleteAnime(url, id) {
+    
+    try {
+        
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {'Content-type': 'application/json'},
+            body: id
+        });
+
+        if (!response.ok) {
+            console.error(`Something didn't go well when fetching ${url}: ${await response.text()}`);
+            return;
+        }
+
+    } catch (error) {
+        console.error(`Error when fetching ${url}: ${error.message}`)
+    }
+
+}
+
 window.onload = () => {
 
     getAllAnime();
