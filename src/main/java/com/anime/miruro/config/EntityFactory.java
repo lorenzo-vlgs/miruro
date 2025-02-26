@@ -12,14 +12,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-import com.anime.miruro.entities.Anime;
-import com.anime.miruro.entities.Character;
-import com.anime.miruro.entities.Genre;
-import com.anime.miruro.entities.Studio;
-import com.anime.miruro.entities.User;
-import com.anime.miruro.services.AnimeService;
-import com.anime.miruro.services.GenreService;
-import com.anime.miruro.services.StudioService;
+import com.anime.miruro.hibernate.entities.Anime;
+import com.anime.miruro.hibernate.entities.Character;
+import com.anime.miruro.hibernate.entities.Genre;
+import com.anime.miruro.hibernate.entities.Studio;
+import com.anime.miruro.hibernate.entities.User;
+import com.anime.miruro.hibernate.services.AnimeService;
+import com.anime.miruro.hibernate.services.GenreService;
+import com.anime.miruro.hibernate.services.StudioService;
 
 @Configuration
 public class EntityFactory {

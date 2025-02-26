@@ -1,4 +1,4 @@
-package com.anime.miruro.controllers.RESTful;
+package com.anime.miruro.hibernate.controllers;
 
 import java.util.List;
 import java.util.Map;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.anime.miruro.entities.Genre;
-import com.anime.miruro.services.GenreService;
+import com.anime.miruro.hibernate.entities.Genre;
+import com.anime.miruro.hibernate.services.GenreService;
 
 
 @RestController

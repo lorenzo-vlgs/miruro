@@ -1,4 +1,4 @@
-package com.anime.miruro.entities;
+package com.anime.miruro.hibernate.entities;
 
 import java.util.Set;
 

@@ -1,9 +1,10 @@
-package com.anime.miruro.repositories;
+package com.anime.miruro.hibernate.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.anime.miruro.entities.Anime;
-import com.anime.miruro.entities.Character;
+import com.anime.miruro.hibernate.entities.Anime;
+import com.anime.miruro.hibernate.entities.Character;
+
 import java.util.List;
 
 

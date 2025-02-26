@@ -1,9 +1,10 @@
-package com.anime.miruro.services;
+package com.anime.miruro.hibernate.services;
 
 import org.springframework.stereotype.Service;
 
-import com.anime.miruro.entities.User;
-import com.anime.miruro.repositories.UserRepository;
+import com.anime.miruro.hibernate.entities.User;
+import com.anime.miruro.hibernate.repositories.UserRepository;
+import com.anime.miruro.services.GenericService;
 
 @Service
 public class UserService extends GenericService<Integer,User,UserRepository>{
