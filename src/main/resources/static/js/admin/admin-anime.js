@@ -72,7 +72,4 @@ async function deleteAnime(url, id) {
 
 }
 
-window.onload = () => {
-
-    getAllAnime();
-}
+window.onload = getAllAnime;

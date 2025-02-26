@@ -172,3 +172,16 @@ document.getElementById('anime-form').addEventListener('submit', function(event)
 });
 
 
+// GESTIRE IL REDIRECT
+function redToForm() {
+    
+    console.log('SONO DENTRO')
+
+    if(idUrl != '0'){
+        redirectToCharacterForm(idUrl);
+    } else {
+        alert(`E' necessario salvare l'anime prima di poter aggiungere i personaggi`);
+    }
+    
+}
+

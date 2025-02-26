@@ -13,6 +13,7 @@
     <!-- JS -->
     <script src="/js/api/admin/api-admin-anime-form.js" defer></script>
     <script src="/js/admin/admin-anime-form.js" defer></script>
+    <script src="/js/redirect.js"></script>
 
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -82,7 +83,10 @@
 
                     <br>
                     <p class="fs-4 fw-semibold bottom-outline">Characters </p>
-                    <button type="button" id="addStudio" class="btn btn-sm btn-secondary ms-2">Add character <i class="bi bi-person-add"></i></button><br><br>
+                    <button type="button" id="addStudio" class="btn btn-sm btn-secondary ms-2" onclick="redToForm()">Add character <i class="bi bi-person-add"></i></button>
+                    
+                    <br><br> 
+                    
                     <div id="character-container" class="container"></div>
                     
                 </div>
