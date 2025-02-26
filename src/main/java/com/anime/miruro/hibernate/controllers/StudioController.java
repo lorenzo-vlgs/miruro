@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,7 +47,7 @@ public class StudioController {
     //
     @GetMapping("/all")
     public List<Studio> getAll(){
-        return studioService.findAll();    
+        return studioService.findAll(Sort.Direction.ASC, "name");    
     }
 
     @GetMapping("/{id}")

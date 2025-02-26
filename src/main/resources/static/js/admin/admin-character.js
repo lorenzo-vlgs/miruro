@@ -22,24 +22,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const faqs = [
         {
-            question: 'How do I add a new genre?',
-            answer: 'To add a new genre, navigate to the "Genres" section in the admin panel and click on the "Add New Genre" button. Fill in the required details, such as the genre name, and click "Save."'
+            question: 'How do I add a new character?',
+            answer: 'To add a new character, navigate to the "Characters" section in the admin panel and click on the "Add New Character" button. Fill in the required details, such as the character name, and click "Save."'
         },
         {
-            question: 'How do I edit an existing genre?',
-            answer: 'To edit an existing genre, navigate to the "Genres" section     in the admin panel. Find the genre you want to edit and click on the "Edit" button. Make the necessary changes and click "Save."'
+            question: 'How do I edit an existing character?',
+            answer: 'To edit an existing character, navigate to the "Characters" section in the admin panel. Find the character you want to edit and click on the "Edit" button. Make the necessary changes and click "Save."'
         },
         {
-            question: 'How do I delete a genre?',
-            answer: 'To delete a genre, go to the "Genres" section in the admin panel. Find the genre you want to delete and click on the "Delete" button. Confirm the deletion when prompted.'
+            question: 'How do I delete a character?',
+            answer: 'To delete a character, go to the "Characters" section in the admin panel. Find the character you want to delete and click on the "Delete" button. Confirm the deletion when prompted.'
         },
         {
-            question: 'How do I handle duplicate genres?',
-            answer: 'If you find duplicate genres, you can merge them by editing one of the genres and updating its details to match the other. Then, delete the duplicate genre.'
+            question: 'How do I handle duplicate characters?',
+            answer: 'If you find duplicate characters, you can merge them by editing one of the characters and updating its details to match the other. Then, delete the duplicate character.'
         },
         {
-            question: 'Is there a limit to the number of genres I can add?',
-            answer: 'There is no specific limit to the number of genres you can add. However, it\'s a good practice to keep the list manageable and relevant to your content.'
+            question: 'Is there a limit to the number of characters I can add?',
+            answer: 'There is no specific limit to the number of characters you can add. However, it\'s a good practice to keep the list manageable and relevant to your content.'
         }
     ];
 
