@@ -3,6 +3,8 @@ package com.anime.miruro.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import jakarta.transaction.Transactional;
@@ -19,6 +21,9 @@ public abstract class GenericService<I, E, D extends JpaRepository<E,I>> {
         repository.save(e);
     }
 
+    public List<E> findAll(Direction direction, String column){
+        return repository.findAll(Sort.by(direction, column));    
+    }
     public List<E> findAll(){
         return repository.findAll();    
     }
@@ -40,4 +45,5 @@ public abstract class GenericService<I, E, D extends JpaRepository<E,I>> {
     public Long getCount(){
         return repository.count();
     }
+
 }
