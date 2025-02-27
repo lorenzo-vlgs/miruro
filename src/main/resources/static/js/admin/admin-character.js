@@ -50,9 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-window.onload = () => {
-    getAnimeNames('/api/animes/all');
-}
+
+ document.addEventListener('DOMContentLoaded', function() {
+        getAnimeNames('/api/animes/all');
+});
 
 /* JS STARTS HERE */
 function delCharacter(id) {

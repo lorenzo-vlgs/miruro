@@ -13,9 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(" ID CHAR: " + idChar);
     }
 
-    if (idChar > 0) {
-        getCharacterById(idChar);
-    }
+    if (idChar > 0) getCharacterById(idChar);
+    if (idAnime > 0) ;
 });
 
 

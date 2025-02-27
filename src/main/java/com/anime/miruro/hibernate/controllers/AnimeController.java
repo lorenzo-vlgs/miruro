@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anime.miruro.hibernate.entities.Anime;
@@ -70,6 +71,7 @@ public class AnimeController {
         animeService.delete(id);
     }
 
+    /* CUSTOM ENDPOINTS */
     
     // COUNT HOW MANY ANIMES THERE ARE IN THE DB
     //
@@ -77,5 +79,19 @@ public class AnimeController {
     public Long getCount() {
         return animeService.getCount();
     }
+
+
+    // GET THE YEARS IT CAN FIND
+    //
+    @GetMapping("/years")
+    public List<Integer> getYears(){
+        return animeService.findYears();
+    }
     
+    @GetMapping("/trending")
+    public List<Anime> getByYearAndSeason(@RequestParam("season") String season, @RequestParam("year") int year){
+        return animeService.findByYearAndSeason(season, year);
+    }
+
+
 }

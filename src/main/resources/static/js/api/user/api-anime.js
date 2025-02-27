@@ -1,7 +1,7 @@
-async function getAllAnime() {
+async function getAllAnime(url) {
     try {
         const response = await fetch(
-            '/api/animes/all',
+            url,
             {
                 method: 'GET',
                 headers: { "Content-Type": "application/json" }
@@ -39,11 +39,6 @@ async function getAllAnime() {
             console.error('Failed to fetch anime data:', errorText); // Log the error response
         }
     } catch (error) {
-        console.log('Error fetching animes: ' + error.message);
+        console.error('Error fetching animes: ' + error.message);
     }
 }
-
-// Load genres and ratings on page load
-document.addEventListener('DOMContentLoaded', () => {
-    getAllAnime();
-});

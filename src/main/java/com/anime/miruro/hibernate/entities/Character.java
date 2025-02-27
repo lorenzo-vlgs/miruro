@@ -53,6 +53,10 @@ public class Character {
     public int getAnimeId() {
         return anime != null ? anime.getId() : 0;
     }
+
+    public String getAnimeName() {
+        return anime != null ? anime.getName() : null;
+    }
     
     
 }

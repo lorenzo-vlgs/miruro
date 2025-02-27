@@ -36,7 +36,7 @@ public class AppController {
 
     @GetMapping("/trending")
     public String getTrending() {
-        return "/html/trending.html";
+        return "/html/user/trending.html";
     }
     
     //

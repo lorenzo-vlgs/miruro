@@ -69,3 +69,8 @@ window.onload = () => {
 
     getAllStudios('/api/studios/all', 'studios-list');
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    getAnimeNames('/api/animes/all');
+
+});

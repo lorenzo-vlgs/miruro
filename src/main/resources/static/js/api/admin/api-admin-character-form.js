@@ -2,7 +2,8 @@ const chaName = document.getElementById('chaName');
 const chaImage = document.getElementById('chaImage');
 const description = document.getElementById('description');
 const role = document.getElementById('role');
-
+const anime = document.getElementById('anime-space');
+const image = document.getElementById('imageDisplay');
 
 async function postCharacter(url, animeData) {
 
@@ -44,7 +45,7 @@ async function getCharacterById(id) {
             chaImage.value = data.image;
             description.value = data.description;
             role.value = data.role;
-            document.getElementById('imageDisplay').src = data.image;
+            image.src = data.image;
 
 
 
