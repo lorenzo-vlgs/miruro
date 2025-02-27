@@ -14,3 +14,8 @@ function redirectToAnimeForm(id) {
 function redirectToCharacterForm(id) {
     window.location.href= `/admin/characters/form?id=${id}`;
 }
+
+async function redirectToRndAnime(){
+
+
+}

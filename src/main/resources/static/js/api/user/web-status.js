@@ -5,11 +5,16 @@ async function fetchCount(url, elementId) {
             headers: { "Content-Type": "application/json" }
         });
 
-        const element = document.getElementById(elementId);
 
+        
         if (response.ok) {
+            
             const data = await response.json();
-            element.innerHTML = data;
+            if (elementId) {
+                const element = document.getElementById(elementId);
+                element.innerHTML = data;
+            }
+
         } else {
             const errorText = await response.text();
             console.error(`Failed to fetch data from ${url}:`, errorText);
@@ -26,5 +31,4 @@ async function getCount() {
     await fetchCount('api/studios/count', 'studios');
 }
 
-// Start
 getCount();
