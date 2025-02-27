@@ -17,5 +17,21 @@ function redirectToCharacterForm(id) {
 
 async function redirectToRndAnime(){
 
+    const response = await fetch(
+        '/api/animes/all',
+        {
+            method: 'GET',
+            headers: { "Content-Type": "application/json" }
+        }
+    );
 
+    const data = await response.json();
+    let idList = [];
+
+    for (const anime of data) {
+        idList.push(anime.id);
+    }
+
+    const randomId = idList[Math.floor(Math.random() * idList.length)];
+    redirectToAnime(randomId);
 }
