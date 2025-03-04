@@ -16,8 +16,6 @@ public interface AnimeRepository extends JpaRepository<Anime,Integer>{
     List<Integer> findYears();
     
     @Query("SELECT a FROM Anime a WHERE month(a.rilascio) BETWEEN :start AND :end AND year(a.rilascio) = :year")
-    List<Anime> findBySeasonAndYear(@Param("start") int start, 
-                                @Param("end") int end, 
-                                @Param("year") int year);
-
+    List<Anime> findBySeasonAndYear(@Param("start") int start, @Param("end") int end, @Param("year") int year); 
+                                 
 }

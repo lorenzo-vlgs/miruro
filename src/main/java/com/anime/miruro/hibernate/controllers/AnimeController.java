@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,6 +50,11 @@ public class AnimeController {
     @GetMapping("/all")
     public List<Anime> getAll(){
         return animeService.findAll(Sort.Direction.ASC, "name");    
+    }
+
+    @GetMapping("/paged")
+    public List<Anime> getAll(Pageable pageable){
+        return animeService.findAll(pageable);    
     }
 
     @GetMapping("/{id}")

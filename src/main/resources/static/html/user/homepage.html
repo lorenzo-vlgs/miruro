@@ -9,9 +9,11 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/general.css">
     <link rel="stylesheet" href="/css/card.css">
+    <link rel="stylesheet" href="/css/home.css">
 
     <!-- JS -->
     <script src="/js/api/user/api-anime.js" defer></script>
+    <script src="/js/user/home.js" defer></script>
     <script src="/js/redirect.js" defer></script>
 
     <!-- Bootstrap Icons -->
@@ -25,13 +27,32 @@
 <body>
 
     <!-- Navbar -->
-    <div id="navbar-container">
+    <div id="navbar-container"> 
         <script id="replace_with_navbar" src="/js/navbar/nav.js"></script>
     </div>
 
     <!-- Main content -->
     <div class="container">
-      <div class="container text-center">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" aria-selected="true">HOME</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" aria-selected="false">NEWEST</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" aria-selected="false">TOP RATED</button>
+                </li>
+            </ul>
+            <div class="ml-auto">
+                <button type="button" class="btn btn-outline-secondary">&lt;</button>
+                <button type="button" class="btn btn-outline-secondary">&gt;</button>
+            </div>
+        </div>
+        
+       
+        <div class="container text-center">
           <div class="row row-cols-6" id="anime-cards">
               <!-- Animes will be placed here dynamically -->
           </div>
@@ -39,10 +60,4 @@
     </div>
 
 </body>
-<script>
-    // Load genres and ratings on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        getAllAnime('/api/animes/all');
-    });
-</script>
 </html>
