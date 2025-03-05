@@ -1,9 +1,6 @@
 // Load genres and ratings on page load
 var page = 0;
-var size = 10;
-
-// numero della pagina
-document.getElementById('page-number').innerText = page + 1;
+var size = 5;
 
 document.addEventListener('DOMContentLoaded', () => {
     loadAnimePage(page);
@@ -12,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function prevPage() {
     if (page > 0) {
         page--;
-        document.getElementById('page-number').innerText = page + 1;
         loadAnimePage(page);
     } else {
         page = 0;
@@ -23,7 +19,6 @@ async function nextPage() {
     const data = await getAllAnime(`/api/animes/paged?page=${page + 1}&size=${size}&sort=name,asc`);
     if (data && data.length > 0) {
         page++;
-        document.getElementById('page-number').innerText = page + 1;
         updateAnimeList(data);
     } else {
         // Gestisci il caso in cui non ci sono più pagine
