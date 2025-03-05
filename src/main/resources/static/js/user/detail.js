@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Use the 'id' variable to fetch and display anime details
     if (id) {
-        const anime = await fetchAnimeDetails(id);
+        const anime = await httpService.invoke(`api/animes/${id}`,'GET');
         if (anime) {
             updateAnimeDetails(anime);
         }

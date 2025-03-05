@@ -16,7 +16,7 @@ function prevPage() {
 }
 
 async function nextPage() {
-    const data = await getAllAnime(`/api/animes/paged?page=${page + 1}&size=${size}&sort=name,asc`);
+    const data = await httpService.invoke(`/api/animes/paged?page=${page + 1}&size=${size}&sort=name,asc`, 'GET');
     if (data && data.length > 0) {
         page++;
         updateAnimeList(data);
@@ -27,7 +27,7 @@ async function nextPage() {
 }
 
 async function loadAnimePage(page) {
-    const data = await getAllAnime(`/api/animes/paged?page=${page}&size=${size}&sort=name,asc`);
+    const data = await httpService.invoke(`/api/animes/paged?page=${page}&size=${size}&sort=name,asc`, 'GET');
     if (data) {
         updateAnimeList(data);
     }

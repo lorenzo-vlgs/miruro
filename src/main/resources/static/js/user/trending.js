@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     getSeasons();
 
     // Dynamically populates the select with all the found years
-    const years = await getYears(`/api/animes/years`);
+    const years = await httpService.invoke(`/api/animes/years`, 'GET');
     getYearsOK(years);
 
     // Set the initial year value
@@ -14,12 +14,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     year = yearsSelect.value;
 
     // Fetch initial anime data
-    getAllAnime(`/api/animes/trending?season=${selectedSeason}&year=${year}`);
+    httpService.invoke(`/api/animes/trending?season=${selectedSeason}&year=${year}`, 'GET');
 
     // Add event listener for year change
     yearsSelect.addEventListener('change', (event) => {
         year = event.target.value;
-        getAllAnime(`/api/animes/trending?season=${selectedSeason}&year=${year}`);
+        httpService.invoke(`/api/animes/trending?season=${selectedSeason}&year=${year}`, 'GET');
     });
 });
 
@@ -56,29 +56,9 @@ function getSeasons() {
             });
 
             // Fetch anime data for the selected season and year
-            getAllAnime(`/api/animes/trending?season=${selectedSeason}&year=${year}`);
+            httpService.invoke(`/api/animes/trending?season=${selectedSeason}&year=${year}`);
         });
     });
-}
-
-/* FROM HERE ONLY API CALLS*/
-
-async function getYears(url) {
-    try {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {'Content-type': 'application/json'}
-        });
-
-        if (response.ok) {
-            return await response.json();
-        }
-
-        return null;
-
-    } catch (error) {
-        console.error(`Error: ${error}`);
-    }
 }
 
 function getYearsOK(years) {

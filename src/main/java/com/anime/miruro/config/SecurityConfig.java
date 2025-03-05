@@ -30,7 +30,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(aut ->
                 aut 
                     .requestMatchers("/html/**","/css/**", "/img/**").permitAll()
-                    .requestMatchers("/js/user/**", "/js/navbar/**", "/js/redirect.js", "/js/api/user/**", "/js/register.js").permitAll()
+                    .requestMatchers("/js/user/**", "/js/navbar/**", "/js/api/user/**", "/js/utils/**").permitAll()
                     .requestMatchers("/register.html", "/sign-up").permitAll()
                     .requestMatchers("/profile/**").permitAll()
                     .requestMatchers("/api/**", "/home/**", "/anime/**", "/trending/**").permitAll()
