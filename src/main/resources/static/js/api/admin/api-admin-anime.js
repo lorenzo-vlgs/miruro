@@ -8,61 +8,134 @@ async function getAllAnime() {
             }
         );
 
-        const animeList = document.getElementById("anime-cards");
-
         if (response.ok) {
             const data = await response.json();
-            let bodyHtml = '';
-
-            for (let anime of data) {
-                bodyHtml += `<div class="anime-card">`;
-                bodyHtml += `<div class="anime-image">
-                                <img src="${anime.image}" alt="${anime.name}" onclick="redirectToAnimeForm(${anime.id})">
-                                <button class="btn btn-sm btn-secondary position-absolute top-0 end-0 m-2 anime-button" style="display: none;" onclick="delAnime(${anime.id})"><i class="bi bi-trash"></i></button>
-                            </div>`;
-                bodyHtml += `<div class="anime-details">`;
-                bodyHtml += `<h2 class="anime-title">${anime.name}</h2>`;
-                bodyHtml += `<div class="anime-categories">`;
-                
-                for (let category of anime.genres) {
-                    bodyHtml += `<span class="category">${category.genreName}</span>`;
-                }
-                
-                bodyHtml += `</div>`;
-                bodyHtml += `</div>`;
-                bodyHtml += `</div>`;
-                
-            }
-
-            animeList.innerHTML = bodyHtml;
-
-            // Add hover events to show/hide the button
-            const characterContainers = document.querySelectorAll('.anime-card');
-            characterContainers.forEach(container => {
-                container.addEventListener('mouseenter', () => {
-                    container.querySelector('.anime-button').style.display = 'block';
-                });
-                container.addEventListener('mouseleave', () => {
-                    container.querySelector('.anime-button').style.display = 'none';
-                });
-            });
-
+            return data;
         } else {
             const errorText = await response.text();
             console.error('Failed to fetch anime data:', errorText); // Log the error response
+            return null;
         }
     } catch (error) {
         console.log('Error fetching animes: ' + error.message);
+        return null;
     }
 }
 
 async function delAnime(id) {
     
     if (confirm(`Are you sure you want to delete this anime?`)) {
-        
         deleteAnime(`/api/animes/delete`,id);
         location.reload();
+    }
+}
 
+async function getAnime() {
+    try {
+        const response = await fetch(
+            `/api/animes/${id}`,
+            {
+                method: 'GET',
+                headers: { "Content-Type": "application/json" }
+            }
+        );
+
+        if (response.ok) {
+            const anime = await response.json();
+            return anime; // Restituisci i dati dell'anime
+        } else {
+            const errorText = await response.text();
+            console.error('Failed to fetch anime data:', errorText); // Log the error response
+            return null;
+        }
+    } catch (error) {
+        console.log('Error fetching animes: ' + error.message);
+        return null;
+    }
+}
+
+async function getGenres(url) {
+    
+    let data = {"test": "testino"};
+    try {        
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {'Content-type': 'application/json'}
+        });
+
+        if (response.ok) {
+            data = await response.json();
+        } else {
+            console.error(`Error when fetching ${url}: ${await response.text()}`)
+        }
+
+    } catch (error) {
+        console.error(`Error fetching animes on ${url}: ${error.message}`)    
+    }
+
+    return data;
+}
+
+async function getStudios(url) {
+    
+    let studioData = {"test": "testino"};
+
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {'Content-type': 'application/json'}
+        });
+
+        if (response.ok) {
+            studioData = await response.json();
+        } else {
+            console.error(`Error when fetching ${url}: ${await response.text()}`)
+        }
+    } catch (error) {
+        console.error(`Error fetching animes on ${url}: ${error.message}`)    
+    }
+
+    return studioData;
+}
+
+async function postAnime(url,animeData) {
+    
+    try {
+        
+        const response = await fetch(url, {
+            method:'POST',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify(animeData)
+        });
+        
+        if (response.ok) {
+            console.log('Anime saved');
+        } else {
+            console.error(`Error during fetch: `, await response.text());
+        }
+
+    } catch (error) {
+        console.error(`Error found when fetching: ${error.message}`)
+    }
+}
+
+async function deleteAnime(url, id) {
+    
+    try {
+        
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {'Content-type': 'application/json'},
+            body: id
+        });
+
+        if (!response.ok) {
+            console.error(`Something didn't go well when fetching ${url}: ${await response.text()}`);
+            return;
+        }
+
+    } catch (error) {
+        console.error(`Error when fetching ${url}: ${error.message}`)
     }
 
 }

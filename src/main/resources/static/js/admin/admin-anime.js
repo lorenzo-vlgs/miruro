@@ -1,3 +1,53 @@
+document.addEventListener('DOMContentLoaded', async () => {
+    const data = await getAllAnime();
+    if (data) {
+        showAnimes(data);
+    }
+});
+
+function showAnimes(data){
+    
+    const animeList = document.getElementById("anime-cards");
+    let bodyHtml = '';
+
+    for (let anime of data) {
+        bodyHtml += `<div class="anime-card">`;
+        bodyHtml += `<div class="anime-image">
+            <img src="${anime.image}" alt="${anime.name}" onclick="redirectToAnimeForm(${anime.id})">
+            <button class="btn btn-sm btn-secondary position-absolute top-0 end-0 m-2 anime-button" style="display: none;" onclick="delAnime(${anime.id})"><i class="bi bi-trash"></i></button>
+            </div>`;
+        bodyHtml += `<div class="anime-details">`;
+        bodyHtml += `<h2 class="anime-title">${anime.name}</h2>`;
+        bodyHtml += `<div class="anime-categories">`;
+        
+        for (let category of anime.genres) {
+            bodyHtml += `<span class="category">${category.genreName}</span>`;
+        }
+        
+        bodyHtml += `</div>`;
+        bodyHtml += `</div>`;
+        bodyHtml += `</div>`;
+        
+    }
+
+    animeList.innerHTML = bodyHtml;
+
+    // Add hover events to show/hide the button
+    const characterContainers = document.querySelectorAll('.anime-card');
+    characterContainers.forEach(container => {
+        container.addEventListener('mouseenter', () => {
+            container.querySelector('.anime-button').style.display = 'block';
+        });
+        container.addEventListener('mouseleave', () => {
+            container.querySelector('.anime-button').style.display = 'none';
+        });
+    });
+}
+
+
+//
+// CREA I FAQ COME IN TUTTE LE ALTRE PAGINE
+//
 function createFAQ(question, answer) {
     const faqContainer = document.createElement('div');
     faqContainer.classList.add('faq-item', 'mb-4');
@@ -50,26 +100,3 @@ document.addEventListener('DOMContentLoaded', function() {
         faqList.appendChild(faqItem);
     });
 });
-
-async function deleteAnime(url, id) {
-    
-    try {
-        
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {'Content-type': 'application/json'},
-            body: id
-        });
-
-        if (!response.ok) {
-            console.error(`Something didn't go well when fetching ${url}: ${await response.text()}`);
-            return;
-        }
-
-    } catch (error) {
-        console.error(`Error when fetching ${url}: ${error.message}`)
-    }
-
-}
-
-window.onload = getAllAnime;

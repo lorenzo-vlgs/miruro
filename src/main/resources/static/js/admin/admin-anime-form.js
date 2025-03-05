@@ -7,13 +7,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     id = urlParams.get('id');
 
     // Use the 'id' variable to fetch and display anime details
-    if (id) {
+    if (id > 0 && id !== null) {
         const anime = await getAnime(id);
         if (anime) {
             updateAnime(anime);
         }
-    } else {
-        console.error('Anime ID not found in the URL');
     }
 });
 
