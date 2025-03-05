@@ -1,142 +1,24 @@
-// Get anime id
-let id = null;
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Get the 'id' parameter from the URL
-    const urlParams = new URLSearchParams(window.location.search);
-    id = urlParams.get('id');
-
-    // Use the 'id' variable to fetch and display anime details
-    if (id > 0) {
-        getAnime(id);
-    }
-
-});
-
 async function getAnime() {
     try {
-        const response = await fetch(`/api/animes/${id}`, {
-            method: 'GET',
-            headers: { "Content-Type": "application/json" }
-        });
-
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('Failed to fetch anime data:', errorText);
-            return;
-        }
-
-        const anime = await response.json();
-
-        // Populate fields
-        document.getElementById('animeTitle').value = anime.name;
-        document.getElementById('animeImage').value = anime.image;
-        document.getElementById('description').value = anime.description;
-        document.getElementById('episodes').value = anime.episodes;
-        document.getElementById('dob').value = anime.rilascio;
-        document.getElementById('imageDisplay').src = anime.image;
-
-        // Fetch all genres and studios
-        const genres = await getGenres('/api/genres/all');
-        const studios = await getStudios('/api/studios/all');
-
-        // Populate existing genres
-        const genreContainer = document.getElementById('genre-container');
-        genreContainer.innerHTML = "";
-        anime.genres.forEach((animeGenre, index) => {
-            genreCount++;
-            const genreDiv = document.createElement('div');
-            genreDiv.classList.add('d-flex', 'align-items-center', 'mt-2');
-            genreDiv.innerHTML = `
-                <span class="me-2 genre-number">${genreCount}.</span>
-                <select class="form-select">
-                </select>
-                <button type="button" class="btn-close ms-2" aria-label="Close"></button>
-            `;
-
-            const selectElement = genreDiv.querySelector('select');
-            const closeButton = genreDiv.querySelector('.btn-close');
-
-            genres.forEach(genre => {
-                const option = document.createElement('option');
-                option.value = genre.id;
-                option.textContent = genre.genreName;
-                if (genre.id === animeGenre.id) {
-                    option.selected = true;
-                }
-                selectElement.appendChild(option);
-            });
-
-            closeButton.addEventListener('click', () => {
-                genreDiv.remove();
-                updateGenreNumbers();
-            });
-
-            genreContainer.appendChild(genreDiv);
-        });
-
-        // Populate existing studios
-        const studioContainer = document.getElementById('studio-container');
-        studioContainer.innerHTML = "";
-        anime.studios.forEach((animeStudio, index) => {
-            studioCount++;
-            const studioDiv = document.createElement('div');
-            studioDiv.classList.add('d-flex', 'align-items-center', 'mt-2');
-            studioDiv.innerHTML = `
-                <span class="me-2 studio-number">${studioCount}.</span>
-                <select class="form-select">
-                </select>
-                <button type="button" class="btn-close ms-2" aria-label="Close"></button>
-            `;
-
-            const selectElement = studioDiv.querySelector('select');
-            const closeButton = studioDiv.querySelector('.btn-close');
-
-            studios.forEach(studio => {
-                const option = document.createElement('option');
-                option.value = studio.id;
-                option.textContent = studio.name;
-                if (studio.id === animeStudio.id) {
-                    option.selected = true;
-                }
-                selectElement.appendChild(option);
-            });
-
-            closeButton.addEventListener('click', () => {
-                studioDiv.remove();
-                updateStudioNumbers();
-            });
-
-            studioContainer.appendChild(studioDiv);
-        });
-
-
-        //Populate with the existing characters
-        const charactersContainer = document.getElementById('character-container');
-        let bodyHtml = '';
-
-        bodyHtml += `<div class="row">`;
-        anime.characters.forEach((character, index) => {
-            // Open a new row every 2 characters
-            if (index % 6 === 0 && index !== 0) {
-                bodyHtml += `</div><div class="row">`;
+        const response = await fetch(
+            `/api/animes/${id}`,
+            {
+                method: 'GET',
+                headers: { "Content-Type": "application/json" }
             }
-            
-            bodyHtml += `
-                <div class="col-2 d-flex flex-column align-items-center">
-                    <img src="${character.image}" alt="${character.name}" class="img-fluid rounded"
-                        style="width: 120px; height: 160px; object-fit: cover;">
-                    <div class="fw-semibold fs-5 text-center mt-2">${character.name}</div>
-                    <div class="text-muted text-center">${character.role}</div>
-                </div>
-            `;
-        });
-        bodyHtml += `</div>`; // Close last row
+        );
 
-        charactersContainer.innerHTML = bodyHtml;
-
+        if (response.ok) {
+            const anime = await response.json();
+            return anime; // Restituisci i dati dell'anime
+        } else {
+            const errorText = await response.text();
+            console.error('Failed to fetch anime data:', errorText); // Log the error response
+            return null;
+        }
     } catch (error) {
-        console.log('Error fetching anime:', error.message);
+        console.log('Error fetching animes: ' + error.message);
+        return null;
     }
 }
 
