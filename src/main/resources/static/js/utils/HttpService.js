@@ -1,6 +1,6 @@
 class HttpService{
 
-    async  invoke(uri, method, body) {
+    async invoke(uri, method, body) {
         try {
             const response = await fetch(
                 uri,

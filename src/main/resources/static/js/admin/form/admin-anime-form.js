@@ -8,13 +8,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Use the 'id' variable to fetch and display anime details
     if (id > 0 && id !== null) {
-        const anime = await getAnime(id);
+        const anime = await httpService.invoke(`/api/animes/${id}`, 'GET');
         if (anime) {
             updateAnime(anime);
         }
     }
 });
 
+
+//
+// API RELATED
+//
 
 //
 // POPOLA I CAMPI CON I DATI DELL'ANIME
@@ -29,8 +33,8 @@ async function updateAnime(anime) {
     document.getElementById('imageDisplay').src = anime.image;
 
     // Fetch all genres and studios
-    const genres = await getGenres('/api/genres/all');
-    const studios = await getStudios('/api/studios/all');
+    const genres = await httpService.invoke('/api/genres/all', 'GET');
+    const studios = await httpService.invoke('/api/studios/all', 'GET');
 
     // Populate existing genres
     const genreContainer = document.getElementById('genre-container');
@@ -138,7 +142,7 @@ document.getElementById('addGenre').addEventListener('click', async function () 
 
     // Fetches and stores all genres from the database
     //
-    const genres = await getGenres('/api/genres/all');
+    const genres = await httpService.invoke('/api/genres/all', 'GET');
 
     const genreContainer = document.getElementById('genre-container');
     const genreDiv = document.createElement('div');
@@ -185,7 +189,7 @@ document.getElementById('addStudio').addEventListener('click', async function ()
     studioCount++;
 
     // Fetches and stores all studios from the database
-    const studios = await getStudios('/api/studios/all');
+    const studios = await httpService.invoke('/api/studios/all', 'GET');
 
     const studioContainer = document.getElementById('studio-container');
     const studioDiv = document.createElement('div');
@@ -274,7 +278,7 @@ document.getElementById('anime-form').addEventListener('submit', function(event)
     const dob = document.getElementById('dob').value;    
 
     const animeData = {
-        "id": idUrl,
+        "id": id,
         "name": name,
         "image": image,
         "description": description,
@@ -284,9 +288,9 @@ document.getElementById('anime-form').addEventListener('submit', function(event)
         "studios": selectedStudios
     };
 
-    const url = idUrl === "0" ? '/api/animes/save' : '/api/animes/update';
+    const url = id === "0" ? '/api/animes/save' : '/api/animes/update';
     // console.log(url);
-    postAnime(url,animeData);
+    httpService.invoke(url ,'POST' ,JSON.stringify(animeData));
 
     window.location.href = '/admin/animes';
 });
@@ -294,8 +298,6 @@ document.getElementById('anime-form').addEventListener('submit', function(event)
 
 // GESTIRE IL REDIRECT
 function redToForm() {
-    
-    console.log('SONO DENTRO')
 
     if(idUrl != '0'){
         redirectToCharacterForm(idUrl);

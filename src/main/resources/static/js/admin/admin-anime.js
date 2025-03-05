@@ -1,9 +1,22 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const data = await getAllAnime();
+    const data = await httpService.invoke('/api/animes/all', 'GET');
     if (data) {
         showAnimes(data);
     }
 });
+
+
+
+//
+// API RELATED
+//
+
+async function delAnime(id) {
+    if (confirm(`Are you sure you want to delete this anime?`)) {
+        await httpService.invoke(`/api/animes/delete`, 'POST', id );
+        location.reload();
+    }
+}
 
 function showAnimes(data){
     
@@ -43,7 +56,6 @@ function showAnimes(data){
         });
     });
 }
-
 
 //
 // CREA I FAQ COME IN TUTTE LE ALTRE PAGINE
