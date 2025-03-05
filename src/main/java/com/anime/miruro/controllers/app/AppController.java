@@ -59,7 +59,7 @@ public class AppController {
     
     @GetMapping("/admin/studios/form")
     public String getStudiosForm(){
-        return "/html/admin/admin-studio-form.html";
+        return "/html/admin/form/admin-studio-form.html";
     }
 
     @GetMapping("/admin/characters")
@@ -69,7 +69,7 @@ public class AppController {
     
     @GetMapping("/admin/characters/form")
     public String geCharactersForm() {
-        return "/html/admin/admin-character-form.html";
+        return "/html/admin/form/admin-character-form.html";
     }
 
     @GetMapping("/admin/animes")
@@ -79,7 +79,7 @@ public class AppController {
 
     @GetMapping("/admin/anime")
     public String getAnime(){
-        return "/html/admin/admin-anime-form.html";
+        return "/html/admin/form/admin-anime-form.html";
     }
 
 }

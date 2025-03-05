@@ -100,5 +100,3 @@ document.addEventListener('DOMContentLoaded', function() {
         faqList.appendChild(faqItem);
     });
 });
-// this is the bean instations 
-httpService = new HttpService();
