@@ -1,4 +1,4 @@
-let id = document.getElementById("studioId");
+let idText = document.getElementById("studioId");
 let image = document.getElementById("studioImage");
 let name = document.getElementById("studioName");
 let description = document.getElementById("studioDescription");
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (id > 0) {
         const data = await httpService.invoke(`/api/studios/${id}`, 'GET');
         if (data) {
-            id.valueOf = data.id;
+            idText.value = data.id;
             image.value = data.image;
             name.value = data.name;
             description.value = data.description;
@@ -52,7 +52,7 @@ document.getElementById('saveStudio').addEventListener('submit', function(event)
         "dob": dob
     }
 
-    let url = id === "-1" ? '/api/studios/save' : '/api/studios/update';
+    let url = id === "0" ? '/api/studios/save' : '/api/studios/update';
 
     httpService.invoke(url, 'POST', JSON.stringify(studioData));
 
