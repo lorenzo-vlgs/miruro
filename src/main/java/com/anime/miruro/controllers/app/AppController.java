@@ -39,9 +39,9 @@ public class AppController {
         return "/html/user/trending.html";
     }
     
-    @GetMapping("/genres")
+    @GetMapping("/search")
     public String getGenresPage(){
-        return "/html/user/genre.html";
+        return "/html/user/search.html";
     }
 
     //
