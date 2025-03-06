@@ -14,12 +14,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     year = yearsSelect.value;
 
     // Fetch initial anime data
-    httpService.invoke(`/api/animes/trending?season=${selectedSeason}&year=${year}`, 'GET');
+    const initialData = await httpService.invoke(`/api/animes/trending?season=${selectedSeason}&year=${year}`, 'GET');
+    updateAnimeList(initialData);
 
     // Add event listener for year change
-    yearsSelect.addEventListener('change', (event) => {
+    yearsSelect.addEventListener('change', async (event) => {
         year = event.target.value;
-        httpService.invoke(`/api/animes/trending?season=${selectedSeason}&year=${year}`, 'GET');
+        const data = await httpService.invoke(`/api/animes/trending?season=${selectedSeason}&year=${year}`, 'GET');
+        updateAnimeList(data);
     });
 });
 
@@ -42,9 +44,8 @@ function getSeasons() {
     // Add click event listeners to the season elements
     const seasonElements = document.querySelectorAll('.season');
     seasonElements.forEach(seasonElement => {
-        seasonElement.addEventListener('click', (event) => {
+        seasonElement.addEventListener('click', async (event) => {
             selectedSeason = event.target.textContent;
-            console.log('Selected season:', selectedSeason);
 
             // Update the styles to reflect the selected season
             seasonElements.forEach(s => s.classList.remove('fw-bold', 'text-secondary'));
@@ -56,7 +57,8 @@ function getSeasons() {
             });
 
             // Fetch anime data for the selected season and year
-            httpService.invoke(`/api/animes/trending?season=${selectedSeason}&year=${year}`);
+            const data = await httpService.invoke(`/api/animes/trending?season=${selectedSeason}&year=${year}`, 'GET');
+            updateAnimeList(data);
         });
     });
 }
@@ -68,5 +70,27 @@ function getYearsOK(years) {
         optionsHtml += `<option value="${year}">${year}</option>`;
     });
     yearsSelect.innerHTML = optionsHtml;
+}
 
+function updateAnimeList(data) {
+    const animeList = document.getElementById("anime-cards");
+    let bodyHtml = '';
+
+    for (let anime of data) {
+        bodyHtml += `<div class="anime-card">`;
+        bodyHtml += `<div class="anime-image"><img src="${anime.image}" alt="${anime.name}"></div>`;
+        bodyHtml += `<div class="anime-details">`;
+        bodyHtml += `<h2 class="anime-title">${anime.name}</h2>`;
+        bodyHtml += `<div class="anime-categories">`;
+        
+        for (let category of anime.genres) {
+            bodyHtml += `<span class="category">${category.genreName}</span>`;
+        }
+        
+        bodyHtml += `</div>`;
+        bodyHtml += `</div>`;
+        bodyHtml += `</div>`;
+    }
+
+    animeList.innerHTML = bodyHtml;
 }

@@ -33,8 +33,8 @@ public class SecurityConfig {
                     .requestMatchers("/js/user/**", "/js/navbar/**", "/js/utils/**").permitAll()
                     .requestMatchers("/register.html", "/sign-up").permitAll()
                     .requestMatchers("/profile/**").permitAll()
-                    .requestMatchers("/api/**", "/home/**", "/anime/**", "/trending/**").permitAll()
-                    .requestMatchers("/js/admin/**", "/js/api/admin/**").hasAuthority("ADMIN")
+                    .requestMatchers("/api/**", "/home/**", "/anime/**", "/trending/**", "/genres/**").permitAll()
+                    .requestMatchers("/js/admin/**").hasAuthority("ADMIN")
                     .requestMatchers("/admin/**").hasAuthority("ADMIN")
             )
             .formLogin(form -> 

@@ -39,6 +39,11 @@ public class AppController {
         return "/html/user/trending.html";
     }
     
+    @GetMapping("/genres")
+    public String getGenresPage(){
+        return "/html/user/genre.html";
+    }
+
     //
     // ADMIN RELATED ENDPOINTS
     //
