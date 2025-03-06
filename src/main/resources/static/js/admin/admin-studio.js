@@ -1,3 +1,66 @@
+document.addEventListener('DOMContentLoaded', async () => {
+    const data = await httpService.invoke('/api/studios/all', 'GET');
+    if (data) {
+        showStudios(data);
+    }
+
+});
+
+function showStudios(data) {
+    
+    const element = document.getElementById('studios-list');
+
+    let bodyHtml = '';
+
+    for (let studio of data) {
+        bodyHtml += `<div class="d-flex flex-column align-items-center">`;
+        bodyHtml += `<img src="${studio.image}" alt="${studio.name}" class="img-fluid" style="width: 200px; height: auto; margin-top: 40px;">`;
+        bodyHtml += `<p class='fw-semibold fs-3 studio-title text-center'>${studio.name}</p>`;
+        bodyHtml += `<br>`;
+        bodyHtml += `<div class="d-flex">`;
+        bodyHtml += `<button class="btn btn-secondary me-2" onClick="redirectToForm(${studio.id})">Edit</button>`;
+        bodyHtml += `<button class="btn btn-danger delete-button" data-id="${studio.id}" data-name="${studio.name}" data-bs-toggle="modal" data-bs-target="#studioDelete">Delete</button>`;
+        bodyHtml += `</div>`;
+        bodyHtml += `</div>`;
+
+    }
+
+    element.innerHTML = bodyHtml;
+
+    // Add event listeners to the delete buttons
+    // For each genre this dynamically give the id and name to the modal    
+    const editButtons = document.querySelectorAll('.delete-button');
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const studioId = this.getAttribute('data-id');
+            const studioName = this.getAttribute('data-name');
+            document.getElementById('studioId').value = studioId;
+            document.getElementById('studio-name').innerHTML = studioName;
+        });
+    });
+
+}
+//
+// API RELATED
+//
+function deleteStudioBtn(){
+    
+    var modal = bootstrap.Modal.getInstance(document.getElementById('studioDelete'));
+    modal.hide();
+    
+    let id = document.getElementById('studioId').value;
+    
+    let studioData = { "id": id};
+    
+    httpService.invoke('/api/studios/delete', 'POST', JSON.stringify(studioData));
+    location.reload(); // Reload the page
+}
+
+
+//
+// NON-API RELATED
+//
+
 // Dynamically populates the faq list
 document.addEventListener('DOMContentLoaded', function() {
     const faqList = document.getElementById('faq-list');
@@ -50,27 +113,3 @@ function createFAQ(question, answer) {
     
     return faqContainer;
 }
-
-// NON FINITO
-function deleteStudioBtn(){
-    
-    var modal = bootstrap.Modal.getInstance(document.getElementById('studioDelete'));
-    modal.hide();
-    
-    let id = document.getElementById('studioId').value;
-    
-    let studioData = { "id": id};
-    
-    deleteStudio('/api/studios/delete', studioData);
-    location.reload(); // Reload the page
-}
-
-window.onload = () => {
-
-    getAllStudios('/api/studios/all', 'studios-list');
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    getAnimeNames('/api/animes/all');
-
-});

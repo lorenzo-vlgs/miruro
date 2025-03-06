@@ -1,12 +1,27 @@
-document.addEventListener('DOMContentLoaded', () => {
+let id = document.getElementById("studioId");
+let image = document.getElementById("studioImage");
+let name = document.getElementById("studioName");
+let description = document.getElementById("studioDescription");
+let dob = document.getElementById("studioDob");
+
+document.addEventListener('DOMContentLoaded', async () => {
 
     // Ricava dall'url l'id dello studio
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
 
     if (id > 0) {
-        getStudio(`/api/studios/${id}`);
+        const data = await httpService.invoke(`/api/studios/${id}`, 'GET');
+        if (data) {
+            id.valueOf = data.id;
+            image.value = data.image;
+            name.value = data.name;
+            description.value = data.description;
+            dob.value = data.dob;
+            
+            document.getElementById('imageDisplay').src = data.image;
 
+        }
     }
     
 });
@@ -39,7 +54,7 @@ document.getElementById('saveStudio').addEventListener('submit', function(event)
 
     let url = id === "-1" ? '/api/studios/save' : '/api/studios/update';
 
-    saveStudio(url, studioData);
+    httpService.invoke(url, 'POST', JSON.stringify(studioData));
 
     window.location.href = `/admin/studios`;
 });
