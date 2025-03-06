@@ -5,12 +5,18 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.anime.miruro.hibernate.entities.Anime;
+import com.anime.miruro.hibernate.entities.Genre;
 import com.anime.miruro.hibernate.repositories.AnimeRepository;
 import com.anime.miruro.services.GenericService;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class AnimeService extends GenericService<Integer, Anime, AnimeRepository>{
     
+    private final GenreService genreService;
+
     public List<Integer> findYears(){
         return getRepository().findYears();
     }
@@ -46,6 +52,11 @@ public class AnimeService extends GenericService<Integer, Anime, AnimeRepository
 
 
         return getRepository().findBySeasonAndYear(start, end, year); 
+    }
+
+    public List<Anime> findByGenre(int genreId){
+        Genre genre = genreService.findById(genreId);
+        return getRepository().findByGenresContains(genre);
     }
 
 }

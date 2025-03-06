@@ -62,6 +62,11 @@ public class AnimeController {
         return animeService.findById(id);
     }
 
+    @GetMapping("/search")
+    public List<Anime> findByGenre(@RequestParam("genre") int genreId){
+        return animeService.findByGenre(genreId);
+    }
+
     // UPDATE
     //
     @PostMapping("/update")

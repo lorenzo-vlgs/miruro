@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.anime.miruro.hibernate.entities.Anime;
+import com.anime.miruro.hibernate.entities.Genre;
 
 
 public interface AnimeRepository extends JpaRepository<Anime,Integer>{
@@ -18,4 +19,6 @@ public interface AnimeRepository extends JpaRepository<Anime,Integer>{
     @Query("SELECT a FROM Anime a WHERE month(a.rilascio) BETWEEN :start AND :end AND year(a.rilascio) = :year")
     List<Anime> findBySeasonAndYear(@Param("start") int start, @Param("end") int end, @Param("year") int year); 
                                  
+    List<Anime> findByGenresContains(Genre genre);
+    
 }

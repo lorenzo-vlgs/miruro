@@ -54,10 +54,10 @@ async function searchByGenre(genreId) {
     if (genreId === 0) {
         data = await httpService.invoke(`/api/animes/all`, 'GET');
     } else {
-        data = await httpService.invoke(`/api/animes/all`, 'GET');
+        data = await httpService.invoke(`/api/animes/search?genre=${genreId}`, 'GET');
 
     }
-    
+
     if(data){
         updateAnimeList(data);
     }
