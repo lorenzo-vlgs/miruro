@@ -1,3 +1,57 @@
+document.addEventListener('DOMContentLoaded', async function() {
+
+    const data = await httpService.invoke('/api/genres/all', 'GET');
+    if (data) {
+        showGenres(data);
+    }
+});
+
+//
+// API RELATED
+//
+function showGenres(data){
+
+    const element = document.getElementById('genres-list');
+    var bodyHtml = '';
+
+    for (let genre of data) {
+        bodyHtml += `<div>`;
+        bodyHtml += `<p class='fw-semibold fs-3' style='margin-top: 30px'>${genre.genreName}</p>`;
+        bodyHtml += `<br>`;
+        bodyHtml += `<button class="btn btn-secondary me-2 edit-button" data-name="${genre.genreName}" data-id="${genre.id}" data-bs-toggle="modal" data-bs-target="#editGenre">Edit</button>`;
+        bodyHtml += `<button class="btn btn-danger delete-button" data-name="${genre.genreName}" data-id="${genre.id}" data-bs-toggle="modal" data-bs-target="#deleteGenre">Delete</button>`;
+        bodyHtml += `</div>`;
+    }
+
+    element.innerHTML = bodyHtml;
+
+    // Add event listeners to the edit buttons
+    // For each genre this dynamically give the id and name to the modal
+    const editButtons = document.querySelectorAll('.edit-button');
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const genreId = this.getAttribute('data-id');
+            const genreName = this.getAttribute('data-name');
+            document.getElementById('genreId').value = genreId;
+            document.getElementById('genre-name').innerHTML = genreName;
+        });
+    });
+
+    const deleteButtons = document.querySelectorAll('.delete-button');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const genreId = this.getAttribute('data-id');
+            const genreName = this.getAttribute('data-name');
+            document.getElementById('genreIdDelete').value = genreId;
+            document.getElementById('genre-name-delete').innerHTML = genreName;
+        });
+    });
+
+}
+
+//
+// NON-API RELATED
+//
 document.getElementById('genre-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -17,7 +71,7 @@ document.getElementById('genre-form').addEventListener('submit', function(event)
     const genre = document.getElementById('genre').value;
     const genreData = { "genreName": genre}
 
-    postGenre('/api/genres/save',genreData);
+    httpService.invoke('/api/genres/save', 'POST', JSON.stringify(genreData));
 });
 
 document.getElementById('edit-genre-form').addEventListener('submit', function(event) {
@@ -44,7 +98,7 @@ document.getElementById('edit-genre-form').addEventListener('submit', function(e
         "genreName": genreName
     };
 
-    postGenre('/api/genres/update',genreData);
+    httpService.invoke('/api/genres/update', 'POST', JSON.stringify(genreData));
     
 });
 
@@ -58,7 +112,7 @@ document.getElementById('delete-genre-form').addEventListener('submit', function
 
     let genreData = { "id": id};
 
-    postGenre('/api/genres/delete',genreData);
+    httpService.invoke('/api/genres/delete', 'POST', JSON.stringify(genreData));
     location.reload(); // Reload the page
 });
 
