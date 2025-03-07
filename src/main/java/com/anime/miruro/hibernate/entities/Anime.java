@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -74,10 +73,9 @@ public class Anime {
     @JsonManagedReference
     private Set<Character> characters;
 
-    @ManyToMany(mappedBy = "animes", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JsonBackReference
-    private Set<User> users;
-
+    @OneToMany(mappedBy = "anime", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserAnime> userAnimeList;
+    
     // Aggiungi un genere nella lista
     //
     public void add(Genre genre){
@@ -107,6 +105,18 @@ public class Anime {
 
         this.characters.add(character);
     }
+
+    // Aggiungi uno user associato a quest'anime
+    //
+    public void add(UserAnime userAnime){
+        if (this.userAnimeList == null) {
+            this.userAnimeList = new HashSet<>();
+        }
+
+        this.userAnimeList.add(userAnime);
+    }
+
+    // ToString
     @Override
     public String toString() {
         return "Anime [id=" + id + ", image=" + image + ", name=" + name + ", description=" + description

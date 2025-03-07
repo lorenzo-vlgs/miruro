@@ -1,11 +1,7 @@
 package com.anime.miruro.hibernate.entities;
 
-
-
 import java.util.HashSet;
 import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,9 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,15 +31,8 @@ public class User{
 
     private boolean enabled;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-        name = "anime_user",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "anime_id")
-    )
-    @JsonManagedReference
-    private Set<Anime> animes;
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserAnime> userAnimeList = new HashSet<>();
     public User() {
     }
 
@@ -55,15 +42,5 @@ public class User{
         this.enabled = enabled;
     }
 
-    //
-    // AGGIUNGI ANIME A QUESTO UTENTE
-    //
-    public void addAnime(Anime anime){
-        if (this.animes == null) {
-            this.animes = new HashSet<>();
-        }
-
-        this.animes.add(anime);
-    }
 }
 
