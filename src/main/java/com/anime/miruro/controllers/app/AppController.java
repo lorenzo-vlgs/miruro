@@ -23,7 +23,7 @@ public class AppController {
 
     @GetMapping("/profile")
     public String getSettings(){
-        return"html/profile.html";
+        return"html/utils/profile.html";
     }
 
     //
