@@ -63,7 +63,8 @@ public class CharacterController {
     // UPDATE
     //
     @PostMapping("/update")
-    public void update(@RequestBody Character character) {
+    public void update(@RequestBody Map<String,String> characterData) {
+        Character character = context.getBean(Character.class, characterData);
         characterService.update(character);
     }
     

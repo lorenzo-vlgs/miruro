@@ -18,6 +18,7 @@ import com.anime.miruro.hibernate.entities.Genre;
 import com.anime.miruro.hibernate.entities.Studio;
 import com.anime.miruro.hibernate.entities.User;
 import com.anime.miruro.hibernate.services.AnimeService;
+import com.anime.miruro.hibernate.services.CharacterService;
 import com.anime.miruro.hibernate.services.GenreService;
 import com.anime.miruro.hibernate.services.StudioService;
 
@@ -28,16 +29,18 @@ public class EntityFactory {
     private GenreService genreService;
     private StudioService studioService;
     private AnimeService animeService;
+    private CharacterService characterService;
     
 
     public EntityFactory() {
     }
 
     @Autowired
-    public EntityFactory(GenreService genreService, StudioService studioService, AnimeService animeService) {
+    public EntityFactory(GenreService genreService, StudioService studioService, AnimeService animeService, CharacterService characterService) {
         this.genreService = genreService;
         this.studioService = studioService;
         this.animeService = animeService;
+        this.characterService = characterService;
     }
 
 
@@ -147,13 +150,20 @@ public class EntityFactory {
 
     @Bean
     @Scope("prototype")
-    public Character newCharacter(Map<String,String> params){
-
-        Character character = new Character();
+    public Character newCharacter(Map<String, String> params) {
+        Character character;
         
         // Set all the parameters
         int id = Integer.parseInt(params.get("id"));
-        if (id > 0) character.setId(id);
+        if (id > 0) {
+            character = characterService.findById(id);
+            if (character == null) {
+                character = new Character();
+                character.setId(id);
+            }
+        } else {
+            character = new Character();
+        }
 
         character.setName(params.get("name"));
         character.setImage(params.get("image"));

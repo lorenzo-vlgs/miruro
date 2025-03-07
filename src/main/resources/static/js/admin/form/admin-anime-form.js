@@ -1,5 +1,5 @@
 // Get anime id
-let id = null;
+let id = 0;
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Get the 'id' parameter from the URL
@@ -290,7 +290,7 @@ document.getElementById('anime-form').addEventListener('submit', function(event)
 
     const url = id === "0" ? '/api/animes/save' : '/api/animes/update';
     // console.log(url);
-    httpService.invoke(url ,'POST' ,JSON.stringify(animeData));
+    httpService.invoke(url ,'POST',JSON.stringify(animeData));
 
     window.location.href = '/admin/animes';
 });
@@ -299,8 +299,8 @@ document.getElementById('anime-form').addEventListener('submit', function(event)
 // GESTIRE IL REDIRECT
 function redToForm() {
 
-    if(idUrl != '0'){
-        redirectToCharacterForm(idUrl);
+    if(id != '0'){
+        redirectToCharacterForm(id);
     } else {
         alert(`E' necessario salvare l'anime prima di poter aggiungere i personaggi`);
     }
