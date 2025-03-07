@@ -1,7 +1,7 @@
 
 async function loadNavbar() {
     try {
-        const response = await fetch('/html/navbar/nav.html');
+        const response = await fetch('/html/utils/nav.html');
         const text = await response.text();
 
         let oldelem = document.querySelector("script#replace_with_navbar");
