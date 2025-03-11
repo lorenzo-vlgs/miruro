@@ -45,7 +45,7 @@ async function checkAuthStatus() {
         } else {
             dropdownMenu.innerHTML = `
                 <li><a class="dropdown-item" href="/login.html"><i class="bi bi-box-arrow-in-right"></i> Log In</a></li>
-                <li><a class="dropdown-item" href="/register"><i class="bi bi-person-plus"></i> Register</a></li>
+                <li><a class="dropdown-item" href="/sign-up"><i class="bi bi-person-plus"></i> Register</a></li>
             `;
         }
     } catch (error) {
