@@ -75,19 +75,49 @@ async function openModal(event, animeId) {
 
     const data = await httpService.invoke(`/api/auth/status`, 'GET');
     const authenticated = data.isAuthenticated;
+    
+    // Changes the model content
+    //
     const modalDialog = document.querySelector('#animeModal .modal-dialog');
     const modalBody = document.getElementById('modalBody');
-
     let bodyHtml = '';
-
+    
     if (authenticated) {
+        const anime = await httpService.invoke(`/api/animes/${animeId}`, 'GET');
+
         bodyHtml += `
-            <p>Welcome back! You are authenticated.</p>
+            <div class="row">
+            <div class="col-4">
+                <!-- Image goes here -->
+                <img src="${anime.image}" alt="Anime image not found">
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <!-- Title goes here -->
+                    <span class="fw-semibold fs-3">${anime.name}</span>
+                </div>
+                <br>
+                <div class="row">
+                <!-- Form goes here -->
+                <form id="animeForm">
+                    <div class="mb-3">
+                        <label for="animeSelect" class="form-label">Select Option</label>
+                        <select class="form-select" id="animeSelect">
+                            <option value="notSet">Not Set</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="alert('Anime added to the user list')">Save changes</button>
+                </form>
+                </div>
+            </div>
+            </div>
         `;
 
         // CHANGE DIMENSION IF HE IS AUTHENTICATED
         modalDialog.classList.add('modal-lg');
         modalDialog.classList.remove('modal-sm');
+
     } else {
         bodyHtml += `
             <p class="text-center">Please log in or sign up</p>
@@ -110,5 +140,19 @@ async function openModal(event, animeId) {
 
     const myModal = new bootstrap.Modal(document.getElementById('animeModal'));
     myModal.show();
+
+    getOptions();
 }
 
+async function getOptions() {
+
+    const statusData = await httpService.invoke("/api/status/all", "GET");
+        let optionsHtml = '';
+
+        for (const status of statusData) {
+            optionsHtml += `<option value="${status.id}">${status.name}</option>`;
+        }
+
+    document.getElementById("animeSelect").innerHTML += optionsHtml;
+    
+}
