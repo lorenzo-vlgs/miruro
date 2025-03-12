@@ -74,6 +74,7 @@ async function openModal(event, animeId) {
     event.stopPropagation(); // Prevent the click event from propagating to the parent elements
 
     const data = await httpService.invoke(`/api/auth/status`, 'GET');
+    console.log(JSON.stringify(data));
     const authenticated = data.isAuthenticated;
     
     // Changes the model content
@@ -87,30 +88,41 @@ async function openModal(event, animeId) {
 
         bodyHtml += `
             <div class="row">
-            <div class="col-4">
-                <!-- Image goes here -->
-                <img src="${anime.image}" alt="Anime image not found">
-            </div>
-            <div class="col-8">
-                <div class="row">
-                    <!-- Title goes here -->
-                    <span class="fw-semibold fs-3">${anime.name}</span>
+                <div class="col-4">
+                    <!-- Image goes here -->
+                    <img src="${anime.image}" alt="Anime image not found">
                 </div>
-                <br>
-                <div class="row">
-                <!-- Form goes here -->
-                <form id="animeForm">
-                    <div class="mb-3">
-                        <label for="animeSelect" class="form-label">Select Option</label>
-                        <select class="form-select" id="animeSelect">
-                            <option value="notSet">Not Set</option>
-                        </select>
+                <div class="col-8">
+                    <div class="row">
+                        <!-- Title goes here -->
+                        <span class="fw-semibold fs-3">${anime.name}</span>
                     </div>
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-outline-secondary" onclick="alert('Anime added to the user list')">Save changes</button>
-                </form>
+                    <br>
+                    <div class="row">
+                        <!-- Form goes here -->
+                        <form id="animeForm">
+                            <div class="mb-3">
+                                <label for="animeSelect" class="form-label">Status</label>
+                                <select class="form-select" id="animeSelect">
+                                    <option value="notSet">Not Set</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="startDate" class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" id="startDate" required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="endDate" class="form-label">End Date</label>
+                                <input type="date" class="form-control" id="endDate">
+                                </div>    
+                            </div>
+                            <br>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-outline-secondary" onclick="addToList(${animeId})">Save changes</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
             </div>
         `;
 
@@ -141,7 +153,11 @@ async function openModal(event, animeId) {
     const myModal = new bootstrap.Modal(document.getElementById('animeModal'));
     myModal.show();
 
+    // Dynamically puts the options in the select
+    //
     getOptions();
+
+
 }
 
 async function getOptions() {
@@ -154,5 +170,25 @@ async function getOptions() {
         }
 
     document.getElementById("animeSelect").innerHTML += optionsHtml;
+
+}
+
+function addToList(animeId) {
     
+    // GET THE ELEMENTS NEEDED
+    //
+    const status = document.getElementById("animeSelect");
+    const start = document.getElementById("startDate");
+    const end = document.getElementById("endDate");
+    
+    var obj = {
+        "animeId" : animeId,
+        "status" : status,
+        "start" : start,
+        "end" : end
+    };
+
+    httpService.invoke(`/api/user-anime/save`, 'POST', JSON.stringify(obj));
+
+
 }

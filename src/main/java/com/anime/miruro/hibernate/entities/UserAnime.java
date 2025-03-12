@@ -1,14 +1,21 @@
 package com.anime.miruro.hibernate.entities;
 
+import java.sql.Date;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "user_anime")
+@Getter
+@Setter
 public class UserAnime {
     
     @EmbeddedId
@@ -27,4 +34,11 @@ public class UserAnime {
     @ManyToOne
     @JoinColumn(name = "status_id", nullable = false)
     private Status status;
+
+    @Column(name = "start_date")
+    private Date startDate;
+
+    @Column(name = "end_date")
+    private Date endDate;
+    
 }
