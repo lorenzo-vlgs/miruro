@@ -23,6 +23,6 @@ public class StatusController {
 
     @GetMapping("/all")
     public List<Status> getStatuses(){
-        return  statusService.findAll(Sort.Direction.ASC, "name"); 
+        return  statusService.findAll(Sort.Direction.ASC, "id"); 
     }
 }

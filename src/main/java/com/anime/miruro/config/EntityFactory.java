@@ -201,12 +201,6 @@ public class EntityFactory {
         // Create a composite key
         UserAnimeId id = new UserAnimeId(user.getId(), anime.getId());
         userAnime = userAnimeService.findById(id);
-        System.out.println("Params: " + params);
-        System.out.println("User: " + user);
-        System.out.println("Anime: " + anime);
-        System.out.println("Status: " + status);
-        System.out.println("Composite Key: " + id);
-        System.out.println("Result from FindById: " + userAnime); 
         
         if (userAnime == null) {
             userAnime = new UserAnime();
