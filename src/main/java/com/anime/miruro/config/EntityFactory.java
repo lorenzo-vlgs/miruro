@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -15,36 +14,34 @@ import org.springframework.context.annotation.Scope;
 import com.anime.miruro.hibernate.entities.Anime;
 import com.anime.miruro.hibernate.entities.Character;
 import com.anime.miruro.hibernate.entities.Genre;
+import com.anime.miruro.hibernate.entities.Status;
 import com.anime.miruro.hibernate.entities.Studio;
 import com.anime.miruro.hibernate.entities.User;
+import com.anime.miruro.hibernate.entities.UserAnime;
+import com.anime.miruro.hibernate.entities.UserAnimeId;
 import com.anime.miruro.hibernate.services.AnimeService;
 import com.anime.miruro.hibernate.services.CharacterService;
 import com.anime.miruro.hibernate.services.GenreService;
+import com.anime.miruro.hibernate.services.StatusService;
 import com.anime.miruro.hibernate.services.StudioService;
+import com.anime.miruro.hibernate.services.UserAnimeService;
+import com.anime.miruro.hibernate.services.UserService;
+
+import lombok.RequiredArgsConstructor;
 
 @Configuration
+@RequiredArgsConstructor
 public class EntityFactory {
     
 
-    private GenreService genreService;
-    private StudioService studioService;
-    private AnimeService animeService;
-    private CharacterService characterService;
+    private final GenreService genreService;
+    private final StudioService studioService;
+    private final AnimeService animeService;
+    private final CharacterService characterService;
+    private final StatusService statusService;
+    private final UserService userService;
+    private final UserAnimeService userAnimeService;
     
-
-    public EntityFactory() {
-    }
-
-    @Autowired
-    public EntityFactory(GenreService genreService, StudioService studioService, AnimeService animeService, CharacterService characterService) {
-        this.genreService = genreService;
-        this.studioService = studioService;
-        this.animeService = animeService;
-        this.characterService = characterService;
-    }
-
-
-
     @Bean
     @Scope("prototype")
     public Genre newGenre(Map<String,String> params){
@@ -153,7 +150,8 @@ public class EntityFactory {
     public Character newCharacter(Map<String, String> params) {
         Character character;
         
-        // Set all the parameters
+
+        // Checks if he already exists
         int id = Integer.parseInt(params.get("id"));
         if (id > 0) {
             character = characterService.findById(id);
@@ -164,7 +162,8 @@ public class EntityFactory {
         } else {
             character = new Character();
         }
-
+        
+        // Set all the parameters
         character.setName(params.get("name"));
         character.setImage(params.get("image"));
         character.setDescription(params.get("description"));
@@ -177,5 +176,34 @@ public class EntityFactory {
 
         return character;
     }
+
+    @Bean
+    @Scope("prototype")
+    public UserAnime newUserAnime(Map<String, String> params) {
+
+        UserAnime userAnime;
+
+        User user = userService.findByUsername(params.get("username"));
+        Anime anime = animeService.findById(Integer.parseInt(params.get("id")));
+        Status status = statusService.findById(Integer.parseInt(params.get("status")));
+
+        // Create a composite key
+        UserAnimeId id = new UserAnimeId(user.getId(), anime.getId());
+        userAnime = userAnimeService.findById(id);
+        if (userAnime == null) {
+            userAnime = new UserAnime();
+            userAnime.setId(id);
+        }
+
+        userAnime = new UserAnime();
+        userAnime.setUser(user);
+        userAnime.setAnime(anime);
+        userAnime.setStatus(status);
+        userAnime.setStartDate(Date.valueOf(params.get("start")));
+        userAnime.setEndDate(Date.valueOf(params.get("end")));
+
+        return userAnime;
+    }
+
 
 }
