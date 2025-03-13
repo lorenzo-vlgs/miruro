@@ -183,9 +183,9 @@ function addToList(animeId) {
     
     var obj = {
         "animeId" : animeId,
-        "status" : status,
-        "start" : start,
-        "end" : end
+        "status" : status.value,
+        "start" : start.value,
+        "end" : end.value
     };
 
     httpService.invoke(`/api/user-anime/save`, 'POST', JSON.stringify(obj));

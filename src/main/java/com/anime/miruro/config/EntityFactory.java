@@ -27,21 +27,33 @@ import com.anime.miruro.hibernate.services.StudioService;
 import com.anime.miruro.hibernate.services.UserAnimeService;
 import com.anime.miruro.hibernate.services.UserService;
 
-import lombok.RequiredArgsConstructor;
 
 @Configuration
-@RequiredArgsConstructor
 public class EntityFactory {
     
 
-    private final GenreService genreService;
-    private final StudioService studioService;
-    private final AnimeService animeService;
-    private final CharacterService characterService;
-    private final StatusService statusService;
-    private final UserService userService;
-    private final UserAnimeService userAnimeService;
+    private GenreService genreService;
+    private StudioService studioService;
+    private AnimeService animeService;
+    private CharacterService characterService;
+    private StatusService statusService;
+    private UserService userService;
+    private UserAnimeService userAnimeService;
     
+
+    
+    public EntityFactory(GenreService genreService, StudioService studioService, AnimeService animeService,
+            CharacterService characterService, StatusService statusService, UserService userService,
+            UserAnimeService userAnimeService) {
+        this.genreService = genreService;
+        this.studioService = studioService;
+        this.animeService = animeService;
+        this.characterService = characterService;
+        this.statusService = statusService;
+        this.userService = userService;
+        this.userAnimeService = userAnimeService;
+    }
+
     @Bean
     @Scope("prototype")
     public Genre newGenre(Map<String,String> params){
@@ -150,7 +162,6 @@ public class EntityFactory {
     public Character newCharacter(Map<String, String> params) {
         Character character;
         
-
         // Checks if he already exists
         int id = Integer.parseInt(params.get("id"));
         if (id > 0) {
@@ -184,18 +195,24 @@ public class EntityFactory {
         UserAnime userAnime;
 
         User user = userService.findByUsername(params.get("username"));
-        Anime anime = animeService.findById(Integer.parseInt(params.get("id")));
+        Anime anime = animeService.findById(Integer.parseInt(params.get("animeId")));
         Status status = statusService.findById(Integer.parseInt(params.get("status")));
 
         // Create a composite key
         UserAnimeId id = new UserAnimeId(user.getId(), anime.getId());
         userAnime = userAnimeService.findById(id);
+        System.out.println("Params: " + params);
+        System.out.println("User: " + user);
+        System.out.println("Anime: " + anime);
+        System.out.println("Status: " + status);
+        System.out.println("Composite Key: " + id);
+        System.out.println("Result from FindById: " + userAnime); 
+        
         if (userAnime == null) {
             userAnime = new UserAnime();
             userAnime.setId(id);
-        }
-
-        userAnime = new UserAnime();
+        } 
+        
         userAnime.setUser(user);
         userAnime.setAnime(anime);
         userAnime.setStatus(status);

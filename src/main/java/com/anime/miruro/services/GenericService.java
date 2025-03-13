@@ -35,7 +35,7 @@ public abstract class GenericService<I, E, D extends JpaRepository<E,I>> {
     }
 
     public E findById(I id){
-        return repository.findById(id).get();
+        return repository.findById(id).orElse(null);
     }
 
     @Transactional

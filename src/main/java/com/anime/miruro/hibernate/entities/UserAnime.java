@@ -2,6 +2,8 @@ package com.anime.miruro.hibernate.entities;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -24,11 +26,13 @@ public class UserAnime {
     @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     @ManyToOne
     @MapsId("animeId")
     @JoinColumn(name = "anime_id")
+    @JsonBackReference
     private Anime anime;
 
     @ManyToOne

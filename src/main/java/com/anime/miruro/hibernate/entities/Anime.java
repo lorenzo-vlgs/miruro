@@ -74,6 +74,7 @@ public class Anime {
     private Set<Character> characters;
 
     @OneToMany(mappedBy = "anime", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<UserAnime> userAnimeList;
     
     // Aggiungi un genere nella lista
