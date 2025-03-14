@@ -27,8 +27,11 @@ import com.anime.miruro.hibernate.services.StudioService;
 import com.anime.miruro.hibernate.services.UserAnimeService;
 import com.anime.miruro.hibernate.services.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 @Configuration
+@Slf4j
 public class EntityFactory {
     
 
@@ -39,7 +42,6 @@ public class EntityFactory {
     private StatusService statusService;
     private UserService userService;
     private UserAnimeService userAnimeService;
-    
 
     
     public EntityFactory(GenreService genreService, StudioService studioService, AnimeService animeService,
@@ -210,8 +212,13 @@ public class EntityFactory {
         userAnime.setUser(user);
         userAnime.setAnime(anime);
         userAnime.setStatus(status);
-        userAnime.setStartDate(Date.valueOf(params.get("start")));
-        userAnime.setEndDate(Date.valueOf(params.get("end")));
+
+        //ADD control if null
+        Date start = params.get("start") != "" ? Date.valueOf(params.get("start")) : null;
+        Date end = params.get("end") != "" ? Date.valueOf(params.get("end")) : null;
+        
+        userAnime.setStartDate(start);
+        userAnime.setEndDate(end);
 
         return userAnime;
     }
